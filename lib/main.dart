@@ -93,7 +93,8 @@ class _MyAppState extends State<_MyApp> {
       child: Container(
         width: MediaQuery.of(context).size.width * 0.85,
         child: GestureDetector(
-          onTap: pressButton,
+          //onTap: pressButton,
+          onTapDown: (value) => pressButton(),
           child: AnimatedContainer(
             duration: Duration(milliseconds: 100),
             height: _heigth,
