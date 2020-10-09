@@ -10,31 +10,42 @@ void main() => runApp(new MaterialApp(
 // ignore: must_be_immutable
 class _MyApp extends StatefulWidget {
   bool _lights = false;
-  Color _color;
-  String _margin;
+  Color _color = Color.fromRGBO(118, 106, 2, 1);
+  var _margin = EdgeInsets.only(top: 0.0);
+  var _padding = EdgeInsets.only(bottom: 6.0);
+  var _heigth = 48.0;
 
   @override
-  _MyAppState createState() => _MyAppState(_lights, _color, _margin);
+  _MyAppState createState() => _MyAppState(_lights, _color, _margin, _padding, _heigth);
 }
 
 class _MyAppState extends State<_MyApp> {
   bool _lights;
   Color _color;
   var _margin;
+  var _padding;
+  var _heigth;
 
-  _MyAppState(this._lights, this._color, this._margin);
+  _MyAppState(this._lights, this._color, this._margin, this._padding, this._heigth);
 
   void pressButton() {
     setState(() {
-      _lights = true;
-      Future.delayed(const Duration(milliseconds: 100), () {
+      _lights = false;
+      Future.delayed(const Duration(milliseconds: 250), () {
         setState(() {
           _color = Color.fromRGBO(118, 106, 2, 1);
           _margin = EdgeInsets.only(top: 0.0);
+          _padding = EdgeInsets.only(bottom: 6.0);
+          _heigth = 48.0;
         });
       });
+      //_lights = true;
       _color = Colors.transparent;
-      _margin = EdgeInsets.only(top: 5.0);
+     // _margin = EdgeInsets.only(top: 3.0, bottom:0.0);
+      //_padding = EdgeInsets.only(bottom: 0.0, top: 3.0);
+      _margin = EdgeInsets.only(top: 8.0);
+      _padding = EdgeInsets.only(bottom: 2.0);
+      _heigth = 44.0;
     });
   }
 
@@ -74,8 +85,8 @@ class _MyAppState extends State<_MyApp> {
     );
 
     final shadowContainer = BoxDecoration(
-      color: _lights ? _color : Color.fromRGBO(118, 106, 2, 1),
-      borderRadius: BorderRadius.circular(12),
+      color: _lights==true ? _color : Color.fromRGBO(118, 106, 2, 1),
+      borderRadius: BorderRadius.circular(20),
     );
 
     return Center(
@@ -83,10 +94,11 @@ class _MyAppState extends State<_MyApp> {
         width: MediaQuery.of(context).size.width * 0.85,
         child: GestureDetector(
           onTap: pressButton,
-          child: Container(
-            height: 48.0,
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 50),
+            height: _heigth,
             margin: _margin,
-            padding: EdgeInsets.only(bottom: 6.0),
+            padding: _padding,
             decoration: shadowContainer,
             child: Container(
               padding: EdgeInsets.all(3.5),
