@@ -43,7 +43,7 @@ class _MyAppState extends State<_MyApp> {
       _color = Colors.transparent;
      // _margin = EdgeInsets.only(top: 3.0, bottom:0.0);
       //_padding = EdgeInsets.only(bottom: 0.0, top: 3.0);
-      _margin = EdgeInsets.only(top: 8.0);
+      _margin = EdgeInsets.only(top: 8.0, left: 2.0, right:2.0);
       _padding = EdgeInsets.only(bottom: 2.0);
       _heigth = 44.0;
     });
@@ -95,7 +95,7 @@ class _MyAppState extends State<_MyApp> {
         child: GestureDetector(
           onTap: pressButton,
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 50),
+            duration: Duration(milliseconds: 100),
             height: _heigth,
             margin: _margin,
             padding: _padding,
