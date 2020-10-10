@@ -12,15 +12,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var top = FractionalOffset.topCenter;
-  var bottom = FractionalOffset.bottomCenter;
-  var list = [
-    Color.fromRGBO(253, 228, 0, 1),
-    Color.fromRGBO(254, 229, 0, 1),
-    Color.fromRGBO(237, 213, 5, 1),
-    Color.fromRGBO(237, 212, 3, 1)
-  ];
-  var stop = [0.0, 0.5, 0.5, 1.0];
+  var top;
+  var bottom;
+  var list;
+  var stop;
 
   Animation<Color> animation;
   AnimationController controller;
@@ -31,18 +26,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final intoContainer = BoxDecoration(
-      gradient: LinearGradient(
-        begin: top,
-        end: bottom,
-        colors: list,
-        tileMode: TileMode.clamp,
-        stops: stop,
-      ),
-      border: Border.all(color: Colors.transparent),
-      borderRadius: BorderRadius.circular(10),
-    );
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -51,7 +34,7 @@ class _MyAppState extends State<MyApp> {
         body: GestureDetector(
           child: Center(
             child: FlutterShine(
-              config: Config(shadowColor: Color.fromRGBO(118, 106, 2, 0.2)),
+              config: Config(shadowColor: StyleApp.colors[4]),
               light: Light(intensity: 2, position: Point(x, y)),
               builder: (BuildContext context, ShineShadow shineShadow) {
                 return Center(
@@ -63,7 +46,7 @@ class _MyAppState extends State<MyApp> {
                       onTapUp: (value) => pressTapUp(),
                       child: AnimatedContainer(
                         duration: Duration(milliseconds: 100),
-                        height: _lights ? 44.0 : 52.0,
+                        height: _lights ? StyleApp.heightDown : StyleApp.heightUp,
                         margin: _lights
                             ? StyleApp.edgeInsets[0]
                             : StyleApp.edgeInsets[1],
@@ -76,9 +59,9 @@ class _MyAppState extends State<MyApp> {
                           decoration: StyleApp.borderContainer,
                           child: AnimatedContainer(
                             duration: Duration(milliseconds: 100),
-                            height: 46.0,
-                            margin: EdgeInsets.all(4.0),
-                            decoration: intoContainer,
+                            height: StyleApp.heightDown,
+                            margin: StyleApp.edgeInsets[10],
+                            decoration: StyleApp.intoContainer,
                             child: Stack(
                               fit: StackFit.expand,
                               children: <Widget>[
@@ -87,13 +70,15 @@ class _MyAppState extends State<MyApp> {
                                     "ДОГОВОРЫ",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      height: 1.20,
-                                      color: Colors.white,
-                                      fontFamily: 'Robots',
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.normal,
-                                      letterSpacing: _lights ? 2.6 : 3.0,
+                                      height: StyleApp.heightText,
+                                      color: StyleApp.colors[14],
+                                      fontFamily: StyleApp.fontFamily,
+                                      fontSize: StyleApp.fontSize18,
+                                      fontWeight: StyleApp.fontWeight400,
+                                      fontStyle: StyleApp.fontStyleNormal,
+                                      letterSpacing: _lights
+                                          ? StyleApp.letterSpacingDown
+                                          : StyleApp.letterSpacingUp,
                                       shadows: shineShadow?.shadows,
                                     ),
                                   ),
@@ -106,8 +91,8 @@ class _MyAppState extends State<MyApp> {
                                     alignment: Alignment.centerRight,
                                     child: Container(
                                       margin: _lights
-                                              ? StyleApp.edgeInsets[4]
-                                              : StyleApp.edgeInsets[5],
+                                          ? StyleApp.edgeInsets[4]
+                                          : StyleApp.edgeInsets[5],
                                       padding: _counter >= 10
                                           ? (_lights
                                               ? StyleApp.edgeInsets[6]
@@ -120,13 +105,12 @@ class _MyAppState extends State<MyApp> {
                                         '$_counter',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          height: 0.95,
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontFamily: 'Robots',
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.w400,
-                                          fontStyle: FontStyle.normal,
+                                          height: StyleApp.heightCounter,
+                                          color: StyleApp.colors[5],
+                                          fontFamily: StyleApp.fontFamily,
+                                          fontSize: StyleApp.fontSize14,
+                                          fontWeight: StyleApp.fontWeight400,
+                                          fontStyle: StyleApp.fontStyleNormal,
                                           shadows: shineShadow?.shadows,
                                         ),
                                       ),
@@ -155,10 +139,10 @@ class _MyAppState extends State<MyApp> {
       top = FractionalOffset.topCenter;
       bottom = FractionalOffset.bottomCenter;
       list = [
-        Color.fromRGBO(253, 228, 0, 1),
-        Color.fromRGBO(254, 229, 0, 1),
-        Color.fromRGBO(237, 213, 5, 1),
-        Color.fromRGBO(237, 212, 3, 1)
+        StyleApp.colors[0],
+        StyleApp.colors[1],
+        StyleApp.colors[2],
+        StyleApp.colors[3]
       ];
       stop = [0.0, 0.5, 0.5, 1.0];
     });
@@ -169,7 +153,7 @@ class _MyAppState extends State<MyApp> {
       _lights = true;
       top = FractionalOffset.topCenter;
       bottom = FractionalOffset.bottomCenter;
-      list = [Color.fromRGBO(237, 213, 5, 1), Color.fromRGBO(237, 212, 3, 1)];
+      list = [StyleApp.colors[2], StyleApp.colors[3]];
       stop = [0.0, 1.0];
     });
   }
