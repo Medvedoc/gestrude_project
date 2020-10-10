@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,7 +19,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
   Animation<Color> animation;
   AnimationController controller;
   bool _lights = false;
-  int _counter = 0;
+  int _counter = Library.counterWidget;
   double x;
   double y;
   @override
@@ -61,8 +60,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                           children: <Widget>[
                             Container(
                               child: Text(
-                                Library.titleButton[0],
-                                //"ДОГОВОРЫ",
+                                Library.titleButton,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   height: StyleApp.heightText,
