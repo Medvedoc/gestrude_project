@@ -101,18 +101,20 @@ class _MyAppState extends State<MyApp> {
                                 ),
                                 AnimatedOpacity(
                                   opacity: _counter > 0 ? 1.0 : 0.0,
-                                  duration: Duration(milliseconds: 200),
+                                  duration: Duration(milliseconds: 300),
                                   child: Container(
                                     alignment: Alignment.centerRight,
                                     child: Container(
-                                      margin: StyleApp.edgeInsets[4],
+                                      margin: _lights
+                                              ? StyleApp.edgeInsets[4]
+                                              : StyleApp.edgeInsets[5],
                                       padding: _counter >= 10
                                           ? (_lights
-                                              ? StyleApp.edgeInsets[5]
-                                              : StyleApp.edgeInsets[6])
+                                              ? StyleApp.edgeInsets[6]
+                                              : StyleApp.edgeInsets[7])
                                           : (_lights
-                                              ? StyleApp.edgeInsets[7]
-                                              : StyleApp.edgeInsets[8]),
+                                              ? StyleApp.edgeInsets[8]
+                                              : StyleApp.edgeInsets[9]),
                                       decoration: StyleApp.counterBoxDecoration,
                                       child: Text(
                                         '$_counter',

@@ -49,10 +49,11 @@ class StyleApp {
     EdgeInsets.only(top: 0.0),
     EdgeInsets.only(bottom: 2.0),
     EdgeInsets.only(bottom: 6.0),
+    EdgeInsets.only(right: 8.5),
     EdgeInsets.only(right: 9.5),
-    EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
-    EdgeInsets.symmetric(horizontal: 16.0, vertical: 7.0),
-    EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-    EdgeInsets.symmetric(horizontal: 10.0, vertical: 7.0),
+    EdgeInsets.symmetric(horizontal: 6.5, vertical: 6.5),//Конечная позиция счетчика >10
+    EdgeInsets.symmetric(horizontal: 6.0, vertical: 7.0),//Начальная позиция счетчика >10
+    EdgeInsets.symmetric(horizontal: 10.5, vertical: 6.5),//Конечная позиция счетчика <10
+    EdgeInsets.symmetric(horizontal: 10.0, vertical: 7.0),//Начальная позиция счетчика <10
   ];
 }
