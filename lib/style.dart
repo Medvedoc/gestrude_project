@@ -67,11 +67,11 @@ class StyleApp {
   static var heightUp = 52.0;
   static var heightDown = 44.0;
   static var letterSpacingUp = 3.0;
-  static var letterSpacingDown = 2.6;
+  static var letterSpacingDown = 2.8;
   static var heightCounter = 0.95;
   static var heightText = 1.20;
   static double fontSize14 = 14.0;
-  static double fontSize18 = 18.0;
+  static double fontSize18 = 20.0;
   static String fontFamily = "Robots";
   static var fontWeight400 = FontWeight.bold;
   static var fontStyleNormal = FontStyle.normal;

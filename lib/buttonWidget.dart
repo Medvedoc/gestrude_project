@@ -1,8 +1,10 @@
+import 'dart:ffi';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_shine/flutter_shine.dart';
 import 'package:gestrude_project/style.dart';
+import 'package:gestrude_project/titleLibrary.dart';
 
 class ButtonWidget extends StatefulWidget {
   @override
@@ -59,7 +61,8 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                           children: <Widget>[
                             Container(
                               child: Text(
-                                "ДОГОВОРЫ",
+                                Library.titleButton[0],
+                                //"ДОГОВОРЫ",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   height: StyleApp.heightText,
