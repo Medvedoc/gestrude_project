@@ -2,63 +2,106 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_shine/flutter_shine.dart';
-import 'package:gestrude_project/style.dart';
+import 'package:gestrude_project/style/customStyle.dart';
 
-class ButtonWidget extends StatefulWidget {
+class CustomButtonWidget extends StatefulWidget {
   final String text;
   final int count;
-  final style;
-  ButtonWidget({this.text, this.count, this.style});
+  final CustomButtonStyle style;
+  CustomButtonWidget({this.text, this.count, this.style});
 
   @override
-  _ButtonWidgetState createState() => _ButtonWidgetState();
+  _CustomButtonWidgetState createState() => _CustomButtonWidgetState();
 }
 
-class _ButtonWidgetState extends State<ButtonWidget> {
-  var top;
-  var bottom;
-  var list;
-  var stop;
+class _CustomButtonWidgetState extends State<CustomButtonWidget> {
   Animation<Color> animation;
   AnimationController controller;
   bool _lights = false;
-  //int _counter = Library.counterWidget;
   double x;
   double y;
+  double borderWidthCount;
+  FractionalOffset top;
+  FractionalOffset bottom;
+  List<Color> list;
+  List<double> stop;
 
   @override
   Widget build(BuildContext context) {
+    top = FractionalOffset.topCenter;
+    bottom = FractionalOffset.bottomCenter;
+    list = [
+      widget.style.colors[0],
+      widget.style.colors[1],
+      widget.style.colors[2],
+      widget.style.colors[3],
+    ];
+    stop = widget.style.stopGradient[0];
+
     return GestureDetector(
       child: Center(
         child: FlutterShine(
-          config: Config(shadowColor: widget.style..colors[4]),
-          light: Light(intensity: 2, position: Point(x, y)),
+          config: Config(shadowColor: widget.style.colors[4]),
+          light:
+              Light(intensity: widget.style.intensity, position: Point(x, y)),
           builder: (BuildContext context, ShineShadow shineShadow) {
             return Center(
               child: Container(
-                width: MediaQuery.of(context).size.width * 0.85,
+                width: MediaQuery.of(context).size.width *
+                    widget.style.mediaQuery,
                 child: GestureDetector(
                   onTap: pressTap,
                   onTapDown: (value) => pressTapDown(),
                   onTapUp: (value) => pressTapUp(),
+                  //Тень кнопки
                   child: AnimatedContainer(
                     duration: Duration(milliseconds: 100),
-                    height: _lights ? widget.style.heightDown : widget.style.heightUp,
+                    height: _lights
+                        ? widget.style.heightDown
+                        : widget.style.heightUp,
                     margin: _lights
                         ? widget.style.edgeInsets[0]
                         : widget.style.edgeInsets[1],
                     padding: _lights
                         ? widget.style.edgeInsets[2]
                         : widget.style.edgeInsets[3],
-                    decoration: widget.style.shadowContainer,
+                    decoration: BoxDecoration(
+                      color: widget.style.colors[6],
+                      borderRadius: widget.style.radiusBorder[0],
+                    ),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      decoration: widget.style.borderContainer,
+                      decoration: BoxDecoration(
+                        color: widget.style.colors[14],
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          tileMode: TileMode.clamp,
+                          colors: [
+                            widget.style.colors[7],
+                            widget.style.colors[8],
+                            widget.style.colors[9],
+                            widget.style.colors[10]
+                          ],
+                          stops: widget.style.stopGradient[0],
+                        ),
+                        borderRadius: widget.style.radiusBorder[1],
+                      ),
                       child: AnimatedContainer(
                         duration: Duration(milliseconds: 100),
                         height: widget.style.heightDown,
                         margin: widget.style.edgeInsets[10],
-                        decoration: widget.style.intoContainer,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: top,
+                            end: bottom,
+                            colors: list,
+                            tileMode: TileMode.clamp,
+                            stops: stop,
+                          ),
+                          //border: Border.all(color: Colors.transparent),
+                          borderRadius: widget.style.radiusBorder[2],
+                        ),
                         child: Stack(
                           fit: StackFit.expand,
                           children: <Widget>[
@@ -90,7 +133,6 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                                   margin: _lights
                                       ? widget.style.edgeInsets[4]
                                       : widget.style.edgeInsets[5],
-                                  //padding: _counter >= 10
                                   padding: widget.count >= 10
                                       ? (_lights
                                           ? widget.style.edgeInsets[6]
@@ -98,9 +140,24 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                                       : (_lights
                                           ? widget.style.edgeInsets[8]
                                           : widget.style.edgeInsets[9]),
-                                  decoration: widget.style.counterBoxDecoration,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      tileMode: TileMode.clamp,
+                                      colors: [
+                                        widget.style.colors[11],
+                                        widget.style.colors[12],
+                                      ],
+                                      stops: widget.style.stopGradient[1],
+                                    ),
+                                    borderRadius: widget.style.radiusBorder[3],
+                                    border: Border.all(
+                                      color: widget.style.colors[13],
+                                      width: widget.style.borderWidthCount,
+                                    ),
+                                  ),
                                   child: Text(
-                                    //'$_counter',
                                     widget.count.toString(),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -139,9 +196,9 @@ class _ButtonWidgetState extends State<ButtonWidget> {
         widget.style.colors[0],
         widget.style.colors[1],
         widget.style.colors[2],
-        widget.style.colors[3]
+        widget.style.colors[3],
       ];
-      stop = [0.0, 0.5, 0.5, 1.0];
+      stop = widget.style.stopGradient[0];
     });
   }
 
@@ -150,8 +207,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
       _lights = true;
       top = FractionalOffset.topCenter;
       bottom = FractionalOffset.bottomCenter;
-      list = [widget.style.colors[2], widget.style.colors[3]];
-      stop = [0.0, 1.0];
+      stop = widget.style.stopGradient[2];
     });
   }
 
@@ -164,7 +220,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
 
   void initState() {
     super.initState();
-    x = -12;
-    y = -12;
+    x = widget.style.x;
+    y = widget.style.y;
   }
 }

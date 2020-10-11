@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class StyleApp {
-  static var top = FractionalOffset.topCenter;
-  static var bottom = FractionalOffset.bottomCenter;
-  static var list = [
-    StyleApp.colors[0],
-    StyleApp.colors[1],
-    StyleApp.colors[2],
-    StyleApp.colors[3],
-  ];
-  static var stop = [0.0, 0.5, 0.5, 1.0];
+class CustomButtonStyle {
+
+  List<Color> colorall;
+  List<Color> list;
 
   //Стиль рамки
-  static final borderContainer = BoxDecoration(
+  var borderContainer = BoxDecoration(
     color: Colors.white,
     gradient: LinearGradient(
       colors: [
-        StyleApp.colors[7],
-        StyleApp.colors[8],
-        StyleApp.colors[9],
-        StyleApp.colors[10]
+       // StyleApp.colors[7],
+       // StyleApp.colors[8],
+       // StyleApp.colors[9],
+       // StyleApp.colors[10]
       ],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
@@ -31,17 +25,19 @@ class StyleApp {
   );
 
   //Стиль тени кнопки
-  static final shadowContainer = BoxDecoration(
-    color: StyleApp.colors[6],
+  var shadowContainer = BoxDecoration(
+    //color: colors[0],
+    //color: StyleApp.colors[6],
     borderRadius: BorderRadius.circular(20),
   );
 
   //Стиль счетчика
-  static final counterBoxDecoration = BoxDecoration(
+  /*var counterBoxDecoration = BoxDecoration(
     gradient: LinearGradient(
       colors: [
-        StyleApp.colors[11],
-        StyleApp.colors[12],
+        //StyleApp.colors[11],
+        //StyleApp.colors[12],
+      colorall[11],
       ],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
@@ -49,35 +45,36 @@ class StyleApp {
       stops: [0.3, 0.6],
     ),
     borderRadius: BorderRadius.circular(28),
-    border: Border.all(color: StyleApp.colors[13], width: 2.0),
-  );
+    //border: Border.all(color: StyleApp.colors[13], width: 2.0),
+  );*/
 
-  static final intoContainer = BoxDecoration(
+  /*var intoContainer = BoxDecoration(
     gradient: LinearGradient(
-      begin: top,
-      end: bottom,
-      colors: list,
+      begin: FractionalOffset.topCenter,
+      end: FractionalOffset.bottomCenter,
+      colors: CustomButtonStyle.colorall[0],
+      //colors: list,
       tileMode: TileMode.clamp,
-      stops: stop,
+      stops: [0.0, 0.5, 0.5, 1.0],
     ),
     border: Border.all(color: Colors.transparent),
     borderRadius: BorderRadius.circular(10),
-  );
+  );*/
 
-  static var heightUp = 52.0;
-  static var heightDown = 44.0;
-  static var letterSpacingUp = 3.0;
-  static var letterSpacingDown = 2.8;
-  static var heightCounter = 0.95;
-  static var heightText = 1.20;
-  static double fontSize14 = 14.0;
-  static double fontSize18 = 20.0;
-  static String fontFamily = "Robots";
-  static var fontWeight400 = FontWeight.bold;
-  static var fontStyleNormal = FontStyle.normal;
+  var heightUp = 52.0;
+  var heightDown = 44.0;
+  var letterSpacingUp = 3.0;
+  var letterSpacingDown = 2.8;
+  var heightCounter = 0.95;
+  var heightText = 1.20;
+  double fontSize14 = 14.0;
+  double fontSize18 = 20.0;
+  String fontFamily = "Robots";
+  var fontWeight400 = FontWeight.bold;
+  var fontStyleNormal = FontStyle.normal;
 
   //Отступы
-  static const edgeInsets = [
+  var edgeInsets = [
     EdgeInsets.only(
         top: 8.0,
         left: 2.0,
@@ -98,8 +95,8 @@ class StyleApp {
     EdgeInsets.all(4.0) // Отступы рамки [10]
   ];
 
-  //Цвета
-  static const colors = [
+  CustomButtonStyle(){
+    colorall = [
     Color.fromRGBO(253, 228, 0, 1), //Цвет 1 градиента кнопки [0]
     Color.fromRGBO(254, 229, 0, 1), //Цвет 2 градиента кнопки [1]
     Color.fromRGBO(237, 213, 5,
@@ -118,4 +115,11 @@ class StyleApp {
     Color.fromRGBO(101, 91, 0, 1), //Цвет рамки счетчика [13]
     Color.fromRGBO(255, 255, 255, 1), //Цвет текста [14]
   ];
+  list = [
+    colorall[1],
+    colorall[2],
+    colorall[3],
+  ];
+
+  }
 }
