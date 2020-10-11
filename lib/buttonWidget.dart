@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_shine/flutter_shine.dart';
 import 'package:gestrude_project/style.dart';
-import 'package:gestrude_project/titleLibrary.dart';
 
 class ButtonWidget extends StatefulWidget {
+  final String text;
+  final int count;
+  final style;
+  ButtonWidget({this.text, this.count, this.style});
+
   @override
   _ButtonWidgetState createState() => _ButtonWidgetState();
 }
@@ -15,19 +19,19 @@ class _ButtonWidgetState extends State<ButtonWidget> {
   var bottom;
   var list;
   var stop;
-
   Animation<Color> animation;
   AnimationController controller;
   bool _lights = false;
-  int _counter = Library.counterWidget;
+  //int _counter = Library.counterWidget;
   double x;
   double y;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Center(
         child: FlutterShine(
-          config: Config(shadowColor: StyleApp.colors[4]),
+          config: Config(shadowColor: widget.style..colors[4]),
           light: Light(intensity: 2, position: Point(x, y)),
           builder: (BuildContext context, ShineShadow shineShadow) {
             return Center(
@@ -39,71 +43,73 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                   onTapUp: (value) => pressTapUp(),
                   child: AnimatedContainer(
                     duration: Duration(milliseconds: 100),
-                    height: _lights ? StyleApp.heightDown : StyleApp.heightUp,
+                    height: _lights ? widget.style.heightDown : widget.style.heightUp,
                     margin: _lights
-                        ? StyleApp.edgeInsets[0]
-                        : StyleApp.edgeInsets[1],
+                        ? widget.style.edgeInsets[0]
+                        : widget.style.edgeInsets[1],
                     padding: _lights
-                        ? StyleApp.edgeInsets[2]
-                        : StyleApp.edgeInsets[3],
-                    decoration: StyleApp.shadowContainer,
+                        ? widget.style.edgeInsets[2]
+                        : widget.style.edgeInsets[3],
+                    decoration: widget.style.shadowContainer,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      decoration: StyleApp.borderContainer,
+                      decoration: widget.style.borderContainer,
                       child: AnimatedContainer(
                         duration: Duration(milliseconds: 100),
-                        height: StyleApp.heightDown,
-                        margin: StyleApp.edgeInsets[10],
-                        decoration: StyleApp.intoContainer,
+                        height: widget.style.heightDown,
+                        margin: widget.style.edgeInsets[10],
+                        decoration: widget.style.intoContainer,
                         child: Stack(
                           fit: StackFit.expand,
                           children: <Widget>[
                             Container(
                               child: Text(
-                                Library.titleButton,
+                                widget.text.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  height: StyleApp.heightText,
-                                  color: StyleApp.colors[14],
-                                  fontFamily: StyleApp.fontFamily,
-                                  fontSize: StyleApp.fontSize18,
-                                  fontWeight: StyleApp.fontWeight400,
-                                  fontStyle: StyleApp.fontStyleNormal,
+                                  height: widget.style.heightText,
+                                  color: widget.style.colors[14],
+                                  fontFamily: widget.style.fontFamily,
+                                  fontSize: widget.style.fontSize18,
+                                  fontWeight: widget.style.fontWeight400,
+                                  fontStyle: widget.style.fontStyleNormal,
                                   letterSpacing: _lights
-                                      ? StyleApp.letterSpacingDown
-                                      : StyleApp.letterSpacingUp,
+                                      ? widget.style.letterSpacingDown
+                                      : widget.style.letterSpacingUp,
                                   shadows: shineShadow?.shadows,
                                 ),
                               ),
                               alignment: Alignment.center,
                             ),
                             AnimatedOpacity(
-                              opacity: _counter > 0 ? 1.0 : 0.0,
+                              opacity: widget.count > 0 ? 1.0 : 0.0,
                               duration: Duration(milliseconds: 300),
                               child: Container(
                                 alignment: Alignment.centerRight,
                                 child: Container(
                                   margin: _lights
-                                      ? StyleApp.edgeInsets[4]
-                                      : StyleApp.edgeInsets[5],
-                                  padding: _counter >= 10
+                                      ? widget.style.edgeInsets[4]
+                                      : widget.style.edgeInsets[5],
+                                  //padding: _counter >= 10
+                                  padding: widget.count >= 10
                                       ? (_lights
-                                          ? StyleApp.edgeInsets[6]
-                                          : StyleApp.edgeInsets[7])
+                                          ? widget.style.edgeInsets[6]
+                                          : widget.style.edgeInsets[7])
                                       : (_lights
-                                          ? StyleApp.edgeInsets[8]
-                                          : StyleApp.edgeInsets[9]),
-                                  decoration: StyleApp.counterBoxDecoration,
+                                          ? widget.style.edgeInsets[8]
+                                          : widget.style.edgeInsets[9]),
+                                  decoration: widget.style.counterBoxDecoration,
                                   child: Text(
-                                    '$_counter',
+                                    //'$_counter',
+                                    widget.count.toString(),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      height: StyleApp.heightCounter,
-                                      color: StyleApp.colors[5],
-                                      fontFamily: StyleApp.fontFamily,
-                                      fontSize: StyleApp.fontSize14,
-                                      fontWeight: StyleApp.fontWeight400,
-                                      fontStyle: StyleApp.fontStyleNormal,
+                                      height: widget.style.heightCounter,
+                                      color: widget.style.colors[5],
+                                      fontFamily: widget.style.fontFamily,
+                                      fontSize: widget.style.fontSize14,
+                                      fontWeight: widget.style.fontWeight400,
+                                      fontStyle: widget.style.fontStyleNormal,
                                       shadows: shineShadow?.shadows,
                                     ),
                                   ),
@@ -130,10 +136,10 @@ class _ButtonWidgetState extends State<ButtonWidget> {
       top = FractionalOffset.topCenter;
       bottom = FractionalOffset.bottomCenter;
       list = [
-        StyleApp.colors[0],
-        StyleApp.colors[1],
-        StyleApp.colors[2],
-        StyleApp.colors[3]
+        widget.style.colors[0],
+        widget.style.colors[1],
+        widget.style.colors[2],
+        widget.style.colors[3]
       ];
       stop = [0.0, 0.5, 0.5, 1.0];
     });
@@ -144,14 +150,15 @@ class _ButtonWidgetState extends State<ButtonWidget> {
       _lights = true;
       top = FractionalOffset.topCenter;
       bottom = FractionalOffset.bottomCenter;
-      list = [StyleApp.colors[2], StyleApp.colors[3]];
+      list = [widget.style.colors[2], widget.style.colors[3]];
       stop = [0.0, 1.0];
     });
   }
 
   void pressTap() {
     setState(() {
-      _counter++;
+      //_counter++;
+      //widget.count ++;
     });
   }
 
