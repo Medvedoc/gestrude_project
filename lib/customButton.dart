@@ -15,29 +15,22 @@ class CustomButtonWidget extends StatefulWidget {
 }
 
 class _CustomButtonWidgetState extends State<CustomButtonWidget> {
-  Animation<Color> animation;
-  AnimationController controller;
   bool _lights = false;
   double x;
   double y;
   double borderWidthCount;
-  FractionalOffset top;
-  FractionalOffset bottom;
-  List<Color> list;
-  List<double> stop;
 
+  /*Color randomColor() {
+    return Color(0xFFFFFFFF & Random().nextInt(0xFFFFFFFF));
+  }*/
+
+  Color color;
+  List<Color> colors;
+  List<double> stops;
+  Alignment begin;
+  Alignment end;
   @override
   Widget build(BuildContext context) {
-    top = FractionalOffset.topCenter;
-    bottom = FractionalOffset.bottomCenter;
-    list = [
-      widget.style.colors[0],
-      widget.style.colors[1],
-      widget.style.colors[2],
-      widget.style.colors[3],
-    ];
-    stop = widget.style.stopGradient[0];
-
     return GestureDetector(
       child: Center(
         child: FlutterShine(
@@ -46,9 +39,10 @@ class _CustomButtonWidgetState extends State<CustomButtonWidget> {
               Light(intensity: widget.style.intensity, position: Point(x, y)),
           builder: (BuildContext context, ShineShadow shineShadow) {
             return Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width *
-                    widget.style.mediaQuery,
+              child: AnimatedContainer(
+                duration: Duration(seconds: 1),
+                width:
+                    MediaQuery.of(context).size.width * widget.style.mediaQuery,
                 child: GestureDetector(
                   onTap: pressTap,
                   onTapDown: (value) => pressTapDown(),
@@ -88,16 +82,16 @@ class _CustomButtonWidgetState extends State<CustomButtonWidget> {
                         borderRadius: widget.style.radiusBorder[1],
                       ),
                       child: AnimatedContainer(
-                        duration: Duration(milliseconds: 100),
+                        duration: Duration(milliseconds: 300),
                         height: widget.style.heightDown,
                         margin: widget.style.edgeInsets[10],
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            begin: top,
-                            end: bottom,
-                            colors: list,
+                            begin: begin,
+                            end: end,
+                            colors: colors,
                             tileMode: TileMode.clamp,
-                            stops: stop,
+                            stops: stops,
                           ),
                           //border: Border.all(color: Colors.transparent),
                           borderRadius: widget.style.radiusBorder[2],
@@ -105,6 +99,7 @@ class _CustomButtonWidgetState extends State<CustomButtonWidget> {
                         child: Stack(
                           fit: StackFit.expand,
                           children: <Widget>[
+                            //Надпись кнопки
                             Container(
                               child: Text(
                                 widget.text.toUpperCase(),
@@ -124,6 +119,7 @@ class _CustomButtonWidgetState extends State<CustomButtonWidget> {
                               ),
                               alignment: Alignment.center,
                             ),
+                            //Счетчик
                             AnimatedOpacity(
                               opacity: widget.count > 0 ? 1.0 : 0.0,
                               duration: Duration(milliseconds: 300),
@@ -190,24 +186,28 @@ class _CustomButtonWidgetState extends State<CustomButtonWidget> {
   void pressTapUp() {
     setState(() {
       _lights = false;
-      top = FractionalOffset.topCenter;
-      bottom = FractionalOffset.bottomCenter;
-      list = [
+      begin = Alignment.topCenter;
+      end = Alignment.bottomCenter;
+      stops = widget.style.stopGradient[0];
+      colors = [
         widget.style.colors[0],
         widget.style.colors[1],
         widget.style.colors[2],
-        widget.style.colors[3],
+        widget.style.colors[3]
       ];
-      stop = widget.style.stopGradient[0];
     });
   }
 
   void pressTapDown() {
     setState(() {
       _lights = true;
-      top = FractionalOffset.topCenter;
-      bottom = FractionalOffset.bottomCenter;
-      stop = widget.style.stopGradient[2];
+      begin = Alignment.bottomLeft;
+      end = Alignment.topRight;
+      colors = [
+        widget.style.colors[3],
+        widget.style.colors[2],
+      ];
+      stops = widget.style.stopGradient[2];
     });
   }
 
@@ -222,5 +222,26 @@ class _CustomButtonWidgetState extends State<CustomButtonWidget> {
     super.initState();
     x = widget.style.x;
     y = widget.style.y;
+    begin = Alignment.topCenter;
+    end = Alignment.bottomCenter;
+    stops = widget.style.stopGradient[0];
+    colors = [
+      widget.style.colors[0],
+      widget.style.colors[1],
+      widget.style.colors[2],
+      widget.style.colors[3]
+    ];
+  }
+
+  void change() {
+    setState(() {
+      begin = Alignment.bottomCenter;
+      end = Alignment.topCenter;
+      colors = [
+        widget.style.colors[2],
+        widget.style.colors[3],
+      ];
+      stops = widget.style.stopGradient[2];
+    });
   }
 }
