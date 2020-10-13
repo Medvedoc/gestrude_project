@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:gestrude_project/customButton.dart';
-import 'package:gestrude_project/style/customStyle.dart';
+import 'package:gestrude_project/TitanButton.dart';
+import 'package:gestrude_project/TitanStyle.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,14 +31,14 @@ class MenuList extends StatelessWidget {
       child: Column(
         children: <Widget>[
           SizedBox(height: 5.0),
-          CustomButtonWidget(
-              text: "button1", count: 0, style: CustomButtonStyle(mediaQuery: 0.50)),
+          TitanButton(
+              headButton: "button1", count: 0, style: TitanButtonStyle(icons: Icons.camera_alt_outlined)),
           SizedBox(height: 5.0),
-          CustomButtonWidget(
-              text: "button2", count: 10, style: CustomButtonStyle(mediaQuery: 0.60)),
+          TitanButton(
+              headButton: "button2", count: 10, style: TitanButtonStyle()),
           SizedBox(height: 5.0),
-          CustomButtonWidget(
-              text: "button3", count: 100, style: CustomButtonStyle(mediaQuery: 0.70)),
+          TitanButton(
+              headButton: "button3", count: 100, style: TitanButtonStyle()),
         ],
       ),
     );

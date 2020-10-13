@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class CustomButtonStyle {
+class TitanButtonStyle {
+  IconData icons; //Иконка кнопки
   double intensity = 2.0; //Интенсивность тени текста кнопки
   double x = -12; //смещение тени текста кнопки по оси х
   double y = -12; //смещение тени текста кнопки по оси y
-  double mediaQuery =
-      0.85; //Отступ кнопки относительно ширины родительского элемента
+  double coefficientButton =
+      0.85; //Отступ Button относительно ширины родительского элемента
+  double coefficientDropbox =
+      0.85; //Отступ Dropbox относительно ширины родительского элемента
   double borderWidthCount = 2.0; //Толщина рамки счетчика
   double heightUp = 52.0;
   double heightDown = 44.0;
   double letterSpacingUp = 3.0;
   double letterSpacingDown = 2.8;
-  double heightCounter = 0.95;
-  double heightText = 1.20;
+  double heightCounter = 0.95; //Высота inline шрифта счетчика
+  double heightText = 1.20; //Высота inline шрифта названия кнопки
   double fontSize14 = 14.0;
   double fontSize18 = 18.0;
   String fontFamily = "Robots";
@@ -39,7 +42,15 @@ class CustomButtonStyle {
         horizontal: 10.5, vertical: 6.5), //Конечная позиция счетчика <10 [8]
     EdgeInsets.symmetric(
         horizontal: 10.0, vertical: 7.0), //Начальная позиция счетчика <10 [9]
-    EdgeInsets.all(4.0) // Отступы рамки [10]
+    EdgeInsets.all(4.0), // Отступы рамки [10]
+    EdgeInsets.symmetric(
+        vertical: 10.0, horizontal: 28.0), //Отступы внутри Dropbox [11]
+    EdgeInsets.symmetric(
+        vertical:
+            6.0), //Отступы между кнопками внутри Dropbox [12] //!Не менять, т.к. значение участвует в расчете отступов раскрывающегося контейнера
+
+    EdgeInsets.only(
+        top: 8.0), //Отступ счетчика сверху и по-бокам при onTap Dropbox [13]
   ];
 
   //Цвета
@@ -61,6 +72,7 @@ class CustomButtonStyle {
     Color.fromRGBO(144, 126, 90, 1), //Цвет 2 градиента обводки счетчика [12]
     Color.fromRGBO(101, 91, 0, 1), //Цвет рамки счетчика [13]
     Color.fromRGBO(255, 255, 255, 1), //Цвет текста [14]
+    Colors.grey.shade900, //Цвет иконки с тенью [15]
   ];
 
   //Границы градиента
@@ -77,5 +89,21 @@ class CustomButtonStyle {
     BorderRadius.circular(10),
     BorderRadius.circular(28)
   ];
-  CustomButtonStyle({this.mediaQuery});
+
+  //Задержка анимации
+  List<Duration> duration = [
+    Duration(
+        milliseconds: 500), //[0] задержка появления элемента AnimatedOpacity
+    Duration(
+        milliseconds: 500), //[1] задержка раскрытия элемента AnimatedContainer
+    Duration(
+        milliseconds:
+            100), //[2] задержка анимации контейнера AnimatedContainer тени кнопки
+    Duration(
+        milliseconds:
+            200), //[3] задержка анимации AnimatedContainer градиента подложки с текстом кнопки
+    Duration(
+        milliseconds: 300), //[4] задержка анимации AnimatedContainer счетчика
+  ];
+  TitanButtonStyle({this.icons});
 }
