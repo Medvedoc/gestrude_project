@@ -22,6 +22,7 @@ class TitanButtonStyle {
   FontStyle fontStyleNormal = FontStyle.normal;
   bool showShadow = true; //Тень иконки кнопки рядом с текстом
 
+
   //Отступы
   List<EdgeInsets> edgeInsets = [
     EdgeInsets.only(
