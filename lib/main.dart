@@ -66,6 +66,7 @@ class TitanButtonWidget extends StatelessWidget {
               style: TitanButtonStyle()),
           SizedBox(height: 5.0),
           TitanButton(
+            gradient: true,
               headButton: "Titan 03", count: 0, style: TitanButtonStyle()),
           SizedBox(height: 5.0),
           TitanButton(

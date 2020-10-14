@@ -14,6 +14,7 @@ class TitanButton extends StatefulWidget {
   final TitanButtonStyle style;
   final IconData icon;
   final double coefButton;
+  final bool gradient;
 
   TitanButton({
     this.headButton,
@@ -24,6 +25,7 @@ class TitanButton extends StatefulWidget {
     this.pressTapUp,
     this.icon,
     this.coefButton,
+    this.gradient,
   });
 
   @override
@@ -102,54 +104,11 @@ class _TitanButtonState extends State<TitanButton> {
                         tileMode: TileMode.clamp,
                         stops: stops,
                       ),
-                      //border: Border.all(color: Colors.transparent),
                       borderRadius: widget.style.radiusBorder[2],
                     ),
                     child: Stack(
                       fit: StackFit.expand,
                       children: <Widget>[
-                        /*
-                        //Надпись кнопки
-
-                        Stack(fit: StackFit.expand, children: <Widget>[
-                         // IconDataProperty==true?Text('111'):Text('222'),
-                         widget.icon.runtimeType!=Null? Container(
-                            alignment: Alignment.center,
-                            child: IconShadowWidget(
-
-                              Icon(
-                                widget.icon,
-                                color: widget.style.colors[14],
-                                size: 24.0,
-                              ),
-                              shadowColor: widget.style.colors[15],
-                              showShadow: widget.style.showShadow,
-                            ),
-                          ):Text('no'),
-                          //alignment: Alignment.center,
-
-                          Container(
-                            margin: EdgeInsets.only(left: 48.0),
-                            alignment: Alignment.center,
-                            child: Text(
-                              widget.headButton.toUpperCase(),
-                              style: TextStyle(
-                                height: widget.style.heightText,
-                                color: widget.style.colors[14],
-                                fontFamily: widget.style.fontFamily,
-                                fontSize: widget.style.fontSize18,
-                                fontWeight: widget.style.fontWeight400,
-                                fontStyle: widget.style.fontStyleNormal,
-                                letterSpacing: _click
-                                    ? widget.style.letterSpacingDown
-                                    : widget.style.letterSpacingUp,
-                                shadows: shineShadow?.shadows,
-                              ),
-                            ),
-                          ),
-                          //alignment: Alignment.center,
-                        ),*/
-
                         Container(
                           alignment: Alignment.center,
                           child: Row(
@@ -179,7 +138,6 @@ class _TitanButtonState extends State<TitanButton> {
                                             child: IconShadowWidget(
                                               Icon(
                                                 widget.icon,
-                                                //Icons.camera_alt_outlined,
                                                 color: widget.style.colors[14],
                                                 size: 24.0,
                                               ),
@@ -248,7 +206,7 @@ class _TitanButtonState extends State<TitanButton> {
                                 ),
                               ),
                               child: Text(
-                              widget.count.toString(),
+                                widget.count.toString(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   height: widget.style.heightCounter,
@@ -284,12 +242,16 @@ class _TitanButtonState extends State<TitanButton> {
       begin = Alignment.topCenter;
       end = Alignment.bottomCenter;
       stops = widget.style.stopGradient[0];
-      colors = [
+      /*colors = [
         widget.style.colors[0],
         widget.style.colors[1],
         widget.style.colors[2],
         widget.style.colors[3]
-      ];
+      ];*/
+
+      colors = widget.gradient == true
+          ? widget.style.gradientButton[2]
+          : widget.style.gradientButton[0];
       _height = _click ? 44.0 : 54.0;
     });
   }
@@ -302,12 +264,17 @@ class _TitanButtonState extends State<TitanButton> {
       _click = true;
       begin = Alignment.bottomCenter;
       end = Alignment.topCenter;
-      colors = [
+      /* colors = [
         widget.style.colors[3],
         widget.style.colors[2],
         widget.style.colors[1],
         widget.style.colors[0]
       ];
+      */
+
+      colors = widget.gradient == true
+          ? widget.style.gradientButton[3]
+          : widget.style.gradientButton[1];
       stops = widget.style.stopGradient[0];
       _height = _click ? 54.0 : 44.0;
     });
@@ -326,12 +293,15 @@ class _TitanButtonState extends State<TitanButton> {
     begin = Alignment.topCenter;
     end = Alignment.bottomCenter;
     stops = widget.style.stopGradient[0];
-    colors = [
+    /*colors = [
       widget.style.colors[0],
       widget.style.colors[1],
       widget.style.colors[2],
       widget.style.colors[3]
-    ];
+    ];*/
+    colors = widget.gradient == true
+        ? widget.style.gradientButton[2]
+        : widget.style.gradientButton[0];
     _height = 54.0;
   }
 }
