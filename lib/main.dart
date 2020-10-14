@@ -56,32 +56,45 @@ class TitanButtonWidget extends StatelessWidget {
           SizedBox(height: 5.0),
           TitanButton(
               icon: Icons.camera_alt_outlined,
-              headButton: "button1",
+              headButton: "Titan 01",
               count: 0,
               style: TitanButtonStyle()),
           SizedBox(height: 5.0),
           TitanButton(
-              headButton: "button11", count: 0, style: TitanButtonStyle()),
+              headButton: "Titan 02",
+              count: 10,
+              style: TitanButtonStyle()),
           SizedBox(height: 5.0),
           TitanButton(
-              headButton: "button2", count: 10, style: TitanButtonStyle()),
+              headButton: "Titan 03", count: 0, style: TitanButtonStyle()),
           SizedBox(height: 5.0),
           TitanButton(
-              headButton: "button3", count: 100, style: titanButtonStandart),
+              icon: Icons.image_outlined,
+              headButton: "Titan 04",
+              count: 100,
+              style: titanButtonStandart),
           SizedBox(height: 5.0),
           Container(
             alignment: Alignment.center,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                TitanButton(
-                    headButton: "фото",
-                    count: 0,
-                    style: TitanButtonStyle(icon: Icons.camera_alt_outlined)),
-                TitanButton(
-                    headButton: "галерея",
-                    count: 0,
-                    style: TitanButtonStyle(icon: Icons.image_outlined)),
+                Expanded(
+                  flex: 1,
+                  child: TitanButton(
+                      icon: Icons.camera_alt_outlined,
+                      headButton: "фото",
+                      count: 0,
+                      style: TitanButtonStyle()),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: TitanButton(
+                      icon: Icons.image_outlined,
+                      headButton: "галерея",
+                      count: 0,
+                      style: TitanButtonStyle()),
+                ),
               ],
             ),
           ),
@@ -91,14 +104,22 @@ class TitanButtonWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                TitanButton(
-                    headButton: "фото",
-                    count: 0,
-                    style: TitanButtonStyle(icon: Icons.camera_alt_outlined)),
-                TitanButton(
-                    headButton: "галерея",
-                    count: 0,
-                    style: TitanButtonStyle(icon: Icons.image_outlined)),
+                Expanded(
+                  flex: 1,
+                  child: TitanButton(
+                      icon: Icons.camera_alt_outlined,
+                      headButton: "фото",
+                      count: 0,
+                      style: titanButtonStandart),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: TitanButton(
+                      icon: Icons.image_outlined,
+                      headButton: "галерея",
+                      count: 0,
+                      style: titanButtonStandart),
+                ),
               ],
             ),
           ),

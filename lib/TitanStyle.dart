@@ -6,10 +6,6 @@ class TitanButtonStyle {
   double intensity = 2.0; //Интенсивность тени текста кнопки
   double x = -12; //смещение тени текста кнопки по оси х
   double y = -12; //смещение тени текста кнопки по оси y
-  double coefficientButton =
-      0.85; //Отступ Button относительно ширины родительского элемента
-  double coefficientDropbox =
-      0.85; //Отступ Dropbox относительно ширины родительского элемента
   double borderWidthCount = 2.0; //Толщина рамки счетчика
   double heightUp = 52.0;
   double heightDown = 44.0;
@@ -22,8 +18,7 @@ class TitanButtonStyle {
   String fontFamily = "Robots";
   FontWeight fontWeight400 = FontWeight.bold;
   FontStyle fontStyleNormal = FontStyle.normal;
-  bool showShadow = true;//Тень иконки кнопки рядом с текстом
-
+  bool showShadow = true; //Тень иконки кнопки рядом с текстом
   //Отступы
   List<EdgeInsets> edgeInsets = [
     EdgeInsets.only(
@@ -85,9 +80,9 @@ class TitanButtonStyle {
 
   //Размер радиуса рамки
   List<BorderRadius> radiusBorder = [
-    BorderRadius.circular(20),//Радиус тени кнопки
-    BorderRadius.circular(12),//Радиус обводки кнопки
-    BorderRadius.circular(10),//Радиус внутреннего контейнера с градиентом
+    BorderRadius.circular(20), //Радиус тени кнопки
+    BorderRadius.circular(12), //Радиус обводки кнопки
+    BorderRadius.circular(10), //Радиус внутреннего контейнера с градиентом
     BorderRadius.circular(28)
   ];
 
@@ -106,5 +101,5 @@ class TitanButtonStyle {
     Duration(
         milliseconds: 300), //[4] задержка анимации AnimatedContainer счетчика
   ];
-  TitanButtonStyle({this.icon});
+  //TitanButtonStyle({this.coefButton});
 }

@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gestrude_project/TitanStyle.dart';
@@ -14,15 +13,18 @@ class TitanButton extends StatefulWidget {
   final int count;
   final TitanButtonStyle style;
   final IconData icon;
+  final double coefButton;
 
-  TitanButton(
-      {this.headButton,
-      this.count,
-      this.style,
-      this.pressTap,
-      this.pressTapDown,
-      this.pressTapUp,
-      this.icon});
+  TitanButton({
+    this.headButton,
+    this.count,
+    this.style,
+    this.pressTap,
+    this.pressTapDown,
+    this.pressTapUp,
+    this.icon,
+    this.coefButton,
+  });
 
   @override
   _TitanButtonState createState() => _TitanButtonState();
@@ -39,11 +41,10 @@ class _TitanButtonState extends State<TitanButton> {
   Alignment end;
   double _height;
   String headButton;
-  double aaa;
+  int aaa;
   double bbb;
   @override
   Widget build(BuildContext context) {
-    print(widget.icon.runtimeType);
     return GestureDetector(
       child: FlutterShine(
         config: Config(shadowColor: widget.style.colors[4]),
@@ -53,9 +54,6 @@ class _TitanButtonState extends State<TitanButton> {
           return AnimatedContainer(
             duration: Duration(seconds: 1),
             alignment: Alignment.center,
-            
-            width: MediaQuery.of(context).size.width *
-                widget.style.coefficientButton,
             child: GestureDetector(
               onTap: pressTap,
               onTapDown: (value) => pressTapDown(),
@@ -180,7 +178,7 @@ class _TitanButtonState extends State<TitanButton> {
                                                 PlaceholderAlignment.middle,
                                             child: IconShadowWidget(
                                               Icon(
-                                                widget.style.icon,
+                                                widget.icon,
                                                 //Icons.camera_alt_outlined,
                                                 color: widget.style.colors[14],
                                                 size: 24.0,
@@ -250,7 +248,7 @@ class _TitanButtonState extends State<TitanButton> {
                                 ),
                               ),
                               child: Text(
-                                widget.count.toString(),
+                              widget.count.toString(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   height: widget.style.heightCounter,

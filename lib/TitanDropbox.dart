@@ -50,8 +50,6 @@ class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
               child: AnimatedContainer(
                 color: Colors.red,
                 margin: widget.style.edgeInsets[6],
-                width: MediaQuery.of(context).size.width *
-                    widget.style.coefficientDropbox,
                 alignment: Alignment.topCenter,
                 height: _height,
                 duration: widget.style.duration[1],
