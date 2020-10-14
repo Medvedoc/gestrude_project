@@ -3,35 +3,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:gestrude_project/TitanButton.dart';
 import 'package:gestrude_project/TitanStyle.dart';
 
-class CustomDropboxWidget extends StatefulWidget {
-  final TitanButtonStyle style;
-  final String headDropbox;
+class TitanDropbox extends StatefulWidget {
+  final bool gradient;
   final int countDropbox;
   final List<TitanButton> listparams;
-  final bool gradient;
+  final TitanButtonStyle style;
+  final String headDropbox;
 
-  CustomDropboxWidget(
-      {this.headDropbox, this.style, this.countDropbox, this.listparams, this.gradient});
+  TitanDropbox({
+    this.gradient,
+    this.countDropbox,
+    this.listparams,
+    this.style,
+    this.headDropbox,
+  });
 
   @override
-  _CustomDropboxWidgetState createState() => _CustomDropboxWidgetState();
+  _TitanDropboxState createState() => _TitanDropboxState();
 }
 
-class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
-  bool _click; //Событие на клик по кнопке
-  Color color;
-  List<Color> colors;
-  List<double> stops;
-  Alignment begin;
-  Alignment end;
-  int counter = 0;
+class _TitanDropboxState extends State<TitanDropbox> {
+  Alignment alignment; //Начало раскрывания контенера
+  double _height = 0.0; //Высота раскрывающегося контейнера
+  bool _visible = false; //Раскрывающийся контейнер по умолчанию скрыт
   double _paddingVertical =
       0.0; //Начльное значение отступа раскрывающегося контейнера в Dropbox
+  int _counter = 0; //Переключатель срабатывания Dropbox
   List<String>
       _sumPadding; //Список всех отступов в получаемом параметре из стилей
-  bool _visible = false; //Раскрывающийся контейнер по умолчанию скрыт
-  double _height = 0.0; //Высота раскрывающегося контейнера
-  Alignment alignment; //Начало раскрывания контенера
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +39,8 @@ class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
         children: <Widget>[
           TitanButton(
               pressTap: pressTap,
-              pressTapDown: pressTapDown,
-              pressTapUp: pressTapUp,
               headButton: widget.headDropbox,
-              //count: widget.countDropbox != null ? widget.countDropbox : 0,
+              arrowDropbox: true,
               style: TitanButtonStyle()),
           InkWell(
             child: AnimatedOpacity(
@@ -74,41 +71,9 @@ class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
     );
   }
 
-  void pressTapUp() {
-    setState(() {
-      // _click = false;
-      /* begin = Alignment.topCenter;
-      end = Alignment.bottomCenter;
-      stops = widget.style.stopGradient[0];
-      colors = [
-        widget.style.colors[0],
-        widget.style.colors[1],
-        widget.style.colors[2],
-        widget.style.colors[3]
-      ];*/
-    });
-  }
-
-  void pressTapDown() {
-    setState(() {
-      //_click = true;
-      /* begin = Alignment.bottomCenter;
-      end = Alignment.topCenter;
-      colors = [
-        widget.style.colors[3],
-        widget.style.colors[2],
-        widget.style.colors[1],
-        widget.style.colors[0]
-      ];
-      stops = widget.style.stopGradient[0];*/
-    });
-  }
-
   void pressTap() {
     setState(() {
-      if (counter == 0) {
-        _click = true;
-        pressTapDown();
+      if (_counter == 0) {
         _sumPadding = ((widget.style.edgeInsets[12]
                     .toString()
                     .replaceAll(RegExp('EdgeInsets'), ''))
@@ -129,84 +94,13 @@ class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
                 .toDouble();
         _visible = !_visible;
         _paddingVertical = 0;
-        counter += 1;
+        _counter += 1;
       } else {
-        _click = false;
-        pressTapUp();
-        counter -= 1;
+        _counter -= 1;
         _visible = !_visible;
         _height = 0;
         alignment = Alignment.topCenter;
       }
     });
   }
-
-  void initState() {
-    super.initState();
-    begin = Alignment.topCenter;
-    end = Alignment.bottomCenter;
-    stops = widget.style.stopGradient[0];
-    colors = [
-      widget.style.colors[0],
-      widget.style.colors[1],
-      widget.style.colors[2],
-      widget.style.colors[3]
-    ];
-  }
 }
-
-class Serb extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final List<String> entries = <String>['A', 'B', 'C'];
-    final List<int> colorCodes = <int>[600, 500, 100];
-    return Container(
-      child: ListView.builder(
-          padding: const EdgeInsets.all(8),
-          itemCount: entries.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 50,
-              color: Colors.amber[colorCodes[index]],
-              child: Center(child: Text('Entry ${entries[index]}')),
-            );
-          }),
-    );
-  }
-}
-/*void pressTap() {
-    setState(() {
-      if (counter == 0) {
-        _click = false;
-        print(_click);
-        //pressTapDown();
-        begin = Alignment.bottomCenter;
-      end = Alignment.topCenter;
-      colors = widget.gradient == true
-          ? widget.style.gradientButton[3]
-          : widget.style.gradientButton[1];
-      stops = widget.style.stopGradient[0];
-      _heightButton = widget.style.heightUp;
-      _margin = widget.style.edgeInsets[0];
-      _padding = widget.style.edgeInsets[2];
-
-        counter += 1;
-      } else {
-        _click = true;
-        print(_click);
-        //pressTapDown();
-        begin = Alignment.topCenter;
-      end = Alignment.bottomCenter;
-      stops = widget.style.stopGradient[0];
-
-      colors = widget.gradient == true
-          ? widget.style.gradientButton[2]
-          : widget.style.gradientButton[0];
-      _heightButton = widget.style.heightUp;
-      _margin = widget.style.edgeInsets[1];
-      _padding = widget.style.edgeInsets[3];
-
-        counter -= 1;
-      }
-    });
-  }*/

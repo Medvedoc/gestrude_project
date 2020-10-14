@@ -25,9 +25,8 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               children: <Widget>[
                 TitanButtonWidget(),
-                //TitanDropboxWidget(),
                 SizedBox(height: 30.0),
-                TitanDropboxWidgetWork(),
+                TitanDropboxWidget(),
               ],
             ),
           ),
@@ -40,11 +39,12 @@ class _MyAppState extends State<MyApp> {
 class TitanButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     var titanButtonStandart = TitanButtonStyle();
     titanButtonStandart.colors[14] = Colors.black;
     titanButtonStandart.colors[15] = Colors.black;
-    titanButtonStandart.x = 0;
-    titanButtonStandart.y = 0;
+    titanButtonStandart.textShadowx = 0;
+    titanButtonStandart.textShadowy = 0;
     titanButtonStandart.intensity = 0;
     titanButtonStandart.showShadow = false;
 
@@ -133,25 +133,9 @@ class TitanDropboxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        CustomDropboxWidget(style: TitanButtonStyle(), listparams: [
-          TitanButton(
-              headButton: "button1", count: 10, style: TitanButtonStyle()),
-          TitanButton(headButton: "button2", style: TitanButtonStyle()),
-        ]),
-      ],
-    );
-  }
-}
-
-class TitanDropboxWidgetWork extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        CustomDropboxWidget(
+        TitanDropbox(
             headDropbox: 'Dropbox',
             style: TitanButtonStyle(),
-            countDropbox: 300,
             listparams: [
               TitanButton(
                   headButton: "button1", count: 0, style: TitanButtonStyle()),

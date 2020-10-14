@@ -6,24 +6,26 @@ import 'package:flutter_shine/flutter_shine.dart';
 import 'package:icon_shadow/icon_shadow.dart';
 
 class TitanButton extends StatefulWidget {
+  final bool arrowDropbox;
+  final bool gradient;
   final Function() pressTap;
   final Function() pressTapDown;
   final Function() pressTapUp;
-  final String headButton;
   final int count;
-  final TitanButtonStyle style;
   final IconData icon;
-  final bool gradient;
+  final String headButton;
+  final TitanButtonStyle style;
 
   TitanButton({
-    this.headButton,
-    this.count,
-    this.style,
+    this.arrowDropbox,
+    this.gradient,
     this.pressTap,
     this.pressTapDown,
     this.pressTapUp,
+    this.count,
     this.icon,
-    this.gradient,
+    this.headButton,
+    this.style,
   });
 
   @override
@@ -31,29 +33,29 @@ class TitanButton extends StatefulWidget {
 }
 
 class _TitanButtonState extends State<TitanButton> {
-  bool _click = false; //Событие на клик по кнопке
-  double _x; //Смещение тени надписи кнопки по оси Х
-  double _y; //Смещение тени надписи кнопки по оси Y
-  Color color;
-  List<Color> colors;
-  List<double> stops;
-  Alignment begin;
-  Alignment end;
-  String headButton;
-
-  double _heightButton;
-  EdgeInsets _margin;
-  EdgeInsets _padding;
-  int counter = 0;
-  int _quarterTurns;
+  Alignment _begin; //Начало градиенто
+  Alignment _end; //Окончание градиента
+  bool _click; //Событие на клик по кнопке
+  double _heightButton; //Высота контейнера кнопки
+  double _textshadowx; //Смещение тени надписи кнопки по оси Х
+  double _textshadowy; //Смещение тени надписи кнопки по оси Y
+  Color _shadow; //Тень кнопки
+  EdgeInsets _margin; //Наружные отступы анимации кнопки
+  EdgeInsets _padding; //Внутренние отступы анимации кнопки
+  IconData _arrow; //Иконка выбранного режима Dropbox
+  int _counter; //Переключатель срабатывания Dropbox
+  List<Color> _colors; //Цвета градиента
+  List<double> _stops; //Точки расположения градиента
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: FlutterShine(
+        //Задаем тень и обводку тексту названия кнопки
         config: Config(shadowColor: widget.style.colors[4]),
-        light:
-            Light(intensity: widget.style.intensity, position: Point(_x, _y)),
+        light: Light(
+            intensity: widget.style.intensity,
+            position: Point(_textshadowx, _textshadowy)),
         builder: (BuildContext context, ShineShadow shineShadow) {
           return AnimatedContainer(
             height: widget.style.heightUp +
@@ -64,16 +66,17 @@ class _TitanButtonState extends State<TitanButton> {
               onTap: pressTap,
               onTapDown: (value) => pressTapDown(),
               onTapUp: (value) => pressTapUp(),
-              //Тень кнопки
+              //Задаем эффект тени контейнеру кнопки
               child: AnimatedContainer(
                 duration: widget.style.duration[2],
                 height: _heightButton,
                 margin: _margin,
                 padding: _padding,
                 decoration: BoxDecoration(
-                  color: widget.style.colors[6],
+                  color: _shadow,
                   borderRadius: widget.style.radiusBorder[0],
                 ),
+                //Задаем градиент рамки кнопки
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
@@ -82,30 +85,27 @@ class _TitanButtonState extends State<TitanButton> {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       tileMode: TileMode.clamp,
-                      colors: [
-                        widget.style.colors[7],
-                        widget.style.colors[8],
-                        widget.style.colors[9],
-                        widget.style.colors[10]
-                      ],
+                      colors: widget.style.gradientButton[4],
                       stops: widget.style.stopGradient[0],
                     ),
                     borderRadius: widget.style.radiusBorder[1],
                   ),
+                  //Задаем градиент подложки надписи текста кнопки
                   child: AnimatedContainer(
                     duration: widget.style.duration[3],
                     height: widget.style.heightDown,
                     margin: widget.style.edgeInsets[10],
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        begin: begin,
-                        end: end,
-                        colors: colors,
+                        begin: _begin,
+                        end: _end,
+                        colors: _colors,
                         tileMode: TileMode.clamp,
-                        stops: stops,
+                        stops: _stops,
                       ),
                       borderRadius: widget.style.radiusBorder[2],
                     ),
+                    //Добавляем содержимое кнопки
                     child: Stack(
                       fit: StackFit.expand,
                       children: <Widget>[
@@ -115,6 +115,7 @@ class _TitanButtonState extends State<TitanButton> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
+                              //Добавляем иконку и надпись текста кнопки
                               RichText(
                                 textAlign: TextAlign.center,
                                 text: TextSpan(
@@ -139,7 +140,7 @@ class _TitanButtonState extends State<TitanButton> {
                                               Icon(
                                                 widget.icon,
                                                 color: widget.style.colors[14],
-                                                size: 24.0,
+                                                size: widget.style.sizeIcon,
                                               ),
                                               shadowColor:
                                                   widget.style.colors[15],
@@ -154,9 +155,6 @@ class _TitanButtonState extends State<TitanButton> {
                                               widget.headButton.toUpperCase() +
                                               " "
                                           : ""),
-                                      /*text: " " +
-                                          widget.headButton.toUpperCase() +
-                                          " ",*/
                                       style: TextStyle(
                                         height: widget.style.heightText,
                                         color: widget.style.colors[14],
@@ -182,44 +180,23 @@ class _TitanButtonState extends State<TitanButton> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
-
-
-
-                              RotatedBox(
-                                quarterTurns: _quarterTurns,child:
-                                Container(
-                                  padding: _click
-                                                  ? widget.style.edgeInsets[6]
-                                                  : widget.style.edgeInsets[7],
-                                child: IconShadowWidget(
-                                              Icon(
-                                                Icons.arrow_drop_down,
-                                                color: widget.style.colors[14],
-                                                size: 28.0,
-                                              ),
-                                              shadowColor:
-                                                  widget.style.colors[15],
-                                              showShadow:
-                                                  widget.style.showShadow,
-                                            
-
-                                ))),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                              //Добавляем стрелку для Dropbox
+                              widget.arrowDropbox == true
+                                  ? Container(
+                                      padding: _click
+                                          ? widget.style.edgeInsets[6]
+                                          : widget.style.edgeInsets[7],
+                                      child: IconShadowWidget(
+                                        Icon(
+                                          _arrow,
+                                          color: widget.style.colors[14],
+                                          size: widget.style.sizeArrow,
+                                        ),
+                                        shadowColor: widget.style.colors[16],
+                                        showShadow: widget.style.showShadow,
+                                      ))
+                                  : SizedBox(),
+                              //Добавляем счетчик
                               widget.count != null
                                   ? AnimatedOpacity(
                                       opacity: (widget.count != null
@@ -229,65 +206,60 @@ class _TitanButtonState extends State<TitanButton> {
                                           ? 1.0
                                           : 0.0,
                                       duration: widget.style.duration[4],
-                                        child: Container(
-                                          margin: _click
-                                              ? widget.style.edgeInsets[4]
-                                              : widget.style.edgeInsets[5],
-                                          padding: (widget.count != null
-                                                      ? widget.count
-                                                      : 0) >=
-                                                  10
-                                              ? (_click
-                                                  ? widget.style.edgeInsets[6]
-                                                  : widget.style.edgeInsets[7])
-                                              : (_click
-                                                  ? widget.style.edgeInsets[8]
-                                                  : widget.style.edgeInsets[9]),
-                                          decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                              begin: Alignment.topCenter,
-                                              end: Alignment.bottomCenter,
-                                              tileMode: TileMode.clamp,
-                                              colors: [
-                                                widget.style.colors[11],
-                                                widget.style.colors[12],
-                                              ],
-                                              stops:
-                                                  widget.style.stopGradient[1],
-                                            ),
-                                            borderRadius:
-                                                widget.style.radiusBorder[3],
-                                            border: Border.all(
-                                              color: widget.style.colors[13],
-                                              width:
-                                                  widget.style.borderWidthCount,
-                                            ),
+                                      child: Container(
+                                        margin: _click
+                                            ? widget.style.edgeInsets[4]
+                                            : widget.style.edgeInsets[5],
+                                        padding: (widget.count != null
+                                                    ? widget.count
+                                                    : 0) >=
+                                                10
+                                            ? (_click
+                                                ? widget.style.edgeInsets[6]
+                                                : widget.style.edgeInsets[7])
+                                            : (_click
+                                                ? widget.style.edgeInsets[8]
+                                                : widget.style.edgeInsets[9]),
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            tileMode: TileMode.clamp,
+                                            colors: [
+                                              widget.style.colors[11],
+                                              widget.style.colors[12],
+                                            ],
+                                            stops: widget.style.stopGradient[1],
                                           ),
-                                          child: Text(
-                                            widget.count.toString(),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              height:
-                                                  widget.style.heightCounter,
-                                              color: widget.style.colors[5],
-                                              fontFamily:
-                                                  widget.style.fontFamily,
-                                              fontSize: widget.style.fontSize14,
-                                              fontWeight:
-                                                  widget.style.fontWeight400,
-                                              fontStyle:
-                                                  widget.style.fontStyleNormal,
-                                              shadows: shineShadow?.shadows,
-                                            ),
+                                          borderRadius:
+                                              widget.style.radiusBorder[3],
+                                          border: Border.all(
+                                            color: widget.style.colors[13],
+                                            width:
+                                                widget.style.borderWidthCount,
                                           ),
                                         ),
-                                      
+                                        child: Text(
+                                          widget.count.toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            height: widget.style.heightCounter,
+                                            color: widget.style.colors[5],
+                                            fontFamily: widget.style.fontFamily,
+                                            fontSize: widget.style.fontSize14,
+                                            fontWeight:
+                                                widget.style.fontWeight400,
+                                            fontStyle:
+                                                widget.style.fontStyleNormal,
+                                            shadows: shineShadow?.shadows,
+                                          ),
+                                        ),
+                                      ),
                                     )
                                   : SizedBox(),
                             ],
                           ),
                         ),
-                        //Счетчик
                       ],
                     ),
                   ),
@@ -306,11 +278,10 @@ class _TitanButtonState extends State<TitanButton> {
     }
     setState(() {
       _click = false;
-      begin = Alignment.topCenter;
-      end = Alignment.bottomCenter;
-      stops = widget.style.stopGradient[0];
-
-      colors = widget.gradient == true
+      _begin = Alignment.topCenter;
+      _end = Alignment.bottomCenter;
+      _stops = widget.style.stopGradient[0];
+      _colors = widget.gradient == true
           ? widget.style.gradientButton[2]
           : widget.style.gradientButton[0];
       _heightButton = widget.style.heightUp;
@@ -325,12 +296,12 @@ class _TitanButtonState extends State<TitanButton> {
     }
     setState(() {
       _click = true;
-      begin = Alignment.bottomCenter;
-      end = Alignment.topCenter;
-      colors = widget.gradient == true
+      _begin = Alignment.bottomCenter;
+      _end = Alignment.topCenter;
+      _colors = widget.gradient == true
           ? widget.style.gradientButton[3]
           : widget.style.gradientButton[1];
-      stops = widget.style.stopGradient[0];
+      _stops = widget.style.stopGradient[0];
       _heightButton = widget.style.heightUp;
       _margin = widget.style.edgeInsets[0];
       _padding = widget.style.edgeInsets[2];
@@ -340,37 +311,32 @@ class _TitanButtonState extends State<TitanButton> {
   void pressTap() {
     if (widget.pressTap != null) {
       widget.pressTap();
-      if (counter == 0) {
+      if (_counter == 0) {
         _click = false;
-        print(_click);
-        //pressTapDown();
-        begin = Alignment.bottomCenter;
-        end = Alignment.topCenter;
-        colors = widget.gradient == true
+        _begin = Alignment.bottomCenter;
+        _end = Alignment.topCenter;
+        _colors = widget.gradient == true
             ? widget.style.gradientButton[3]
             : widget.style.gradientButton[1];
-        stops = widget.style.stopGradient[0];
+        _stops = widget.style.stopGradient[0];
         _heightButton = widget.style.heightUp;
         _margin = widget.style.edgeInsets[0];
         _padding = widget.style.edgeInsets[2];
-_quarterTurns = 2;
-        counter += 1;
+        _arrow = Icons.arrow_drop_up;
+        _counter += 1;
       } else {
         _click = true;
-        print(_click);
-        //pressTapDown();
-        begin = Alignment.topCenter;
-        end = Alignment.bottomCenter;
-        stops = widget.style.stopGradient[0];
-
-        colors = widget.gradient == true
+        _begin = Alignment.topCenter;
+        _end = Alignment.bottomCenter;
+        _stops = widget.style.stopGradient[0];
+        _colors = widget.gradient == true
             ? widget.style.gradientButton[2]
             : widget.style.gradientButton[0];
         _heightButton = widget.style.heightUp;
         _margin = widget.style.edgeInsets[1];
         _padding = widget.style.edgeInsets[3];
-_quarterTurns = 0;
-        counter -= 1;
+        _arrow = Icons.arrow_drop_down;
+        _counter -= 1;
       }
     }
   }
@@ -378,17 +344,19 @@ _quarterTurns = 0;
   void initState() {
     super.initState();
     _click = false;
-    _x = widget.style.x;
-    _y = widget.style.y;
-    begin = Alignment.topCenter;
-    end = Alignment.bottomCenter;
-    stops = widget.style.stopGradient[0];
-    colors = widget.gradient == true
+    _counter = 0;
+    _textshadowx = widget.style.textShadowx;
+    _textshadowy = widget.style.textShadowy;
+    _begin = Alignment.topCenter;
+    _end = Alignment.bottomCenter;
+    _stops = widget.style.stopGradient[0];
+    _shadow = widget.gradient == true?widget.style.colors[17]:widget.style.colors[6];
+    _colors = widget.gradient == true
         ? widget.style.gradientButton[2]
         : widget.style.gradientButton[0];
     _heightButton = widget.style.heightUp;
     _margin = widget.style.edgeInsets[1];
     _padding = widget.style.edgeInsets[3];
-    _quarterTurns = 0;
+    _arrow = Icons.arrow_drop_down;
   }
 }

@@ -64,7 +64,7 @@ flutter:
   fonts:
     - family: "Robots"
       fonts:
-        - asset: lib/fonts/Robots-Regular.ttf
+        - asset: lib/asset/fonts/Robots-Regular.ttf
           style: normal
           weight: 400
   #   - family: Trajan Pro

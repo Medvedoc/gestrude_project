@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class TitanButtonStyle {
+  double textShadowx = -12.0; //смещение тени текста кнопки по оси х
+  double textShadowy = -12.0; //смещение тени текста кнопки по оси y
   IconData icon; //Иконка кнопки
   double intensity = 2.0; //Интенсивность тени текста кнопки
-  double x = -12; //смещение тени текста кнопки по оси х
-  double y = -12; //смещение тени текста кнопки по оси y
   double borderWidthCount = 2.0; //Толщина рамки счетчика
   double heightUp = 52.0;
   double heightDown = 44.0;
+  double sizeIcon = 24.0;
+  double sizeArrow = 26.0;
   double letterSpacingUp = 3.0;
   double letterSpacingDown = 2.8;
   double heightCounter = 0.95; //Высота inline шрифта счетчика
@@ -19,6 +21,7 @@ class TitanButtonStyle {
   FontWeight fontWeight400 = FontWeight.bold;
   FontStyle fontStyleNormal = FontStyle.normal;
   bool showShadow = true; //Тень иконки кнопки рядом с текстом
+
   //Отступы
   List<EdgeInsets> edgeInsets = [
     EdgeInsets.only(
@@ -58,7 +61,7 @@ class TitanButtonStyle {
         1), //Цвет 4 градиента кнопки и Цвет 2 градиента кнопки при onTapUp [3]
     Color.fromRGBO(118, 106, 2, 0.2), //[4]
     Color.fromRGBO(255, 255, 255, 1), //[5]
-    Color.fromRGBO(118, 106, 2, 1), //Цвет тени кнопки снизу [6]
+    Color.fromRGBO(118, 106, 2, 1), //Цвет тени обычной кнопки снизу [6]
     Color.fromRGBO(112, 112, 112, 1), //Цвет 1 градиента обводки кнопки [7]
     Color.fromRGBO(243, 243, 243, 1), //Цвет 2 градиента обводки кнопки [8]
     Color.fromRGBO(89, 89, 89, 1), //Цвет 2 градиента обводки кнопки [9]
@@ -67,33 +70,46 @@ class TitanButtonStyle {
     Color.fromRGBO(144, 126, 90, 1), //Цвет 2 градиента обводки счетчика [12]
     Color.fromRGBO(101, 91, 0, 1), //Цвет рамки счетчика [13]
     Color.fromRGBO(255, 255, 255, 1), //Цвет текста [14]
-    Colors.grey.shade400, //Цвет иконки с тенью [15]
+    Colors.grey.shade900, //Цвет иконки с тенью [15]
+    Colors.grey.shade500, //Цвет иконки раскрывающегося списка [16]
+    Color.fromRGBO(143, 0, 0, 1), //Цвет тени красной кнопки снизу [17]
   ];
 
   List<List<Color>> gradientButton = [
     [
+      //Градиент неактивной обычной кнопки
       Color.fromRGBO(253, 228, 0, 1),
       Color.fromRGBO(254, 229, 0, 1),
       Color.fromRGBO(237, 213, 5, 1),
       Color.fromRGBO(237, 212, 3, 1),
     ],
     [
+      //Градиент активной обычной кнопки
       Color.fromRGBO(237, 212, 3, 1),
       Color.fromRGBO(237, 213, 5, 1),
       Color.fromRGBO(254, 229, 0, 1),
       Color.fromRGBO(253, 228, 0, 1),
     ],
     [
+      //Градиент неактивной красной кнопки
       Color.fromRGBO(255, 0, 0, 1),
       Color.fromRGBO(255, 0, 0, 1),
       Color.fromRGBO(208, 5, 5, 1),
       Color.fromRGBO(208, 5, 5, 1),
     ],
     [
+      //Градиент активной красной кнопки
       Color.fromRGBO(209, 0, 0, 1),
       Color.fromRGBO(209, 0, 0, 1),
       Color.fromRGBO(208, 5, 5, 1),
       Color.fromRGBO(208, 5, 5, 1),
+    ],
+    [
+      //Градиент рамки кнопки
+      Color.fromRGBO(112, 112, 112, 1),
+      Color.fromRGBO(243, 243, 243, 1),
+      Color.fromRGBO(89, 89, 89, 1),
+      Color.fromRGBO(193, 193, 193, 1),
     ],
   ];
 
