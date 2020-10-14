@@ -25,9 +25,9 @@ class TitanButtonStyle {
   //Отступы
   List<EdgeInsets> edgeInsets = [
     EdgeInsets.only(
-        top: 12.0,
-        left: 1.5,
-        right: 1.5), //Отступ счетчика сверху и по-бокам при onTapDown [0]
+        top: 14.0,
+        left: 2,
+        right: 2), //Отступ счетчика сверху и по-бокам при onTapDown [0]
     EdgeInsets.only(top: 0.0), //Отступ счетчика сверху [1]
     EdgeInsets.only(bottom: 0.0), //Отступ счетчика снизу при onTapDown [2]
     EdgeInsets.only(bottom: 6.0), //Отступ счетчика снизу [3]
