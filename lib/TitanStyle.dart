@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class TitanButtonStyle {
-  IconData icons; //Иконка кнопки
+  IconData icon; //Иконка кнопки
   double intensity = 2.0; //Интенсивность тени текста кнопки
   double x = -12; //смещение тени текста кнопки по оси х
   double y = -12; //смещение тени текста кнопки по оси y
@@ -22,6 +22,7 @@ class TitanButtonStyle {
   String fontFamily = "Robots";
   FontWeight fontWeight400 = FontWeight.bold;
   FontStyle fontStyleNormal = FontStyle.normal;
+  bool showShadow = true;//Тень иконки кнопки рядом с текстом
 
   //Отступы
   List<EdgeInsets> edgeInsets = [
@@ -84,18 +85,18 @@ class TitanButtonStyle {
 
   //Размер радиуса рамки
   List<BorderRadius> radiusBorder = [
-    BorderRadius.circular(20),
-    BorderRadius.circular(12),
-    BorderRadius.circular(10),
+    BorderRadius.circular(20),//Радиус тени кнопки
+    BorderRadius.circular(12),//Радиус обводки кнопки
+    BorderRadius.circular(10),//Радиус внутреннего контейнера с градиентом
     BorderRadius.circular(28)
   ];
 
   //Задержка анимации
   List<Duration> duration = [
     Duration(
-        milliseconds: 500), //[0] задержка появления элемента AnimatedOpacity
+        milliseconds: 300), //[0] задержка появления элемента AnimatedOpacity
     Duration(
-        milliseconds: 500), //[1] задержка раскрытия элемента AnimatedContainer
+        milliseconds: 300), //[1] задержка раскрытия элемента AnimatedContainer
     Duration(
         milliseconds:
             100), //[2] задержка анимации контейнера AnimatedContainer тени кнопки
@@ -105,5 +106,5 @@ class TitanButtonStyle {
     Duration(
         milliseconds: 300), //[4] задержка анимации AnimatedContainer счетчика
   ];
-  TitanButtonStyle({this.icons});
+  TitanButtonStyle({this.icon});
 }

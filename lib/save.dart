@@ -1,17 +1,17 @@
-/*import 'package:flutter/material.dart';
-import 'package:gestrude_project/customButton.dart';
-import 'package:gestrude_project/style/customStyle.dart';
+import 'package:flutter/material.dart';
+import 'package:gestrude_project/TitanButton.dart';
+import 'package:gestrude_project/TitanStyle.dart';
 
-class CustomDropbox extends StatefulWidget {
+class CustomDropboxWidgetWork extends StatefulWidget {
   final String head;
-  final List<CustomButtonWidget> listparams;
-  final CustomButtonStyle style;
-  CustomDropbox({this.listparams, this.style, this.head});
+  final List<TitanButton> listparams;
+  final TitanButtonStyle style;
+  CustomDropboxWidgetWork({this.listparams, this.style, this.head});
   @override
-  _CustomDropboxState createState() => _CustomDropboxState();
+  _CustomDropboxWidgetWorkState createState() => _CustomDropboxWidgetWorkState();
 }
 
-class _CustomDropboxState extends State<CustomDropbox> {
+class _CustomDropboxWidgetWorkState extends State<CustomDropboxWidgetWork> {
   double _paddingVertical =
       0.0; //Начльное значение отступа раскрывающегося контейнера в Dropbox
   List<String>
@@ -94,4 +94,3 @@ class _CustomDropboxState extends State<CustomDropbox> {
     alignment = Alignment.topCenter;
   }
 }
-*/
