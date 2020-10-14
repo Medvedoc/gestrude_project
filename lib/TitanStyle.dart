@@ -23,10 +23,10 @@ class TitanButtonStyle {
   List<EdgeInsets> edgeInsets = [
     EdgeInsets.only(
         top: 8.0,
-        left: 2.0,
-        right: 2.0), //Отступ счетчика сверху и по-бокам при onTapDown [0]
+        left: 1.5,
+        right: 1.5), //Отступ счетчика сверху и по-бокам при onTapDown [0]
     EdgeInsets.only(top: 0.0), //Отступ счетчика сверху [1]
-    EdgeInsets.only(bottom: 2.0), //Отступ счетчика снизу при onTapDown [2]
+    EdgeInsets.only(bottom: 0.0), //Отступ счетчика снизу при onTapDown [2]
     EdgeInsets.only(bottom: 6.0), //Отступ счетчика снизу [3]
     EdgeInsets.only(right: 8.5), //Отступ счетчика справа при onTapDown [4]
     EdgeInsets.only(right: 9.5), //Отступ счетчика справа [5]
@@ -39,8 +39,7 @@ class TitanButtonStyle {
     EdgeInsets.symmetric(
         horizontal: 10.0, vertical: 7.0), //Начальная позиция счетчика <10 [9]
     EdgeInsets.all(4.0), // Отступы рамки [10]
-    EdgeInsets.symmetric(
-        vertical: 10.0, horizontal: 28.0), //Отступы внутри Dropbox [11]
+    EdgeInsets.symmetric(horizontal: 18.0), //Отступы внутри Dropbox [11]
     EdgeInsets.symmetric(
         vertical:
             6.0), //Отступы между кнопками внутри Dropbox [12] //!Не менять, т.к. значение участвует в расчете отступов раскрывающегося контейнера
@@ -73,28 +72,22 @@ class TitanButtonStyle {
 
   List<List<Color>> gradientButton = [
     [
-      Color.fromRGBO(253, 228, 0, 1), //Цвет 1 градиента кнопки [0]
-      Color.fromRGBO(254, 229, 0, 1), //Цвет 2 градиента кнопки [1]
-      Color.fromRGBO(237, 213, 5,
-          1), //Цвет 3 градиента кнопки и Цвет 1 градиента кнопки при onTapUp[2]
-      Color.fromRGBO(237, 212, 3,
-          1), //Цвет 4 градиента кнопки и Цвет 2 градиента кнопки при onTapUp [3]
+      Color.fromRGBO(253, 228, 0, 1),
+      Color.fromRGBO(254, 229, 0, 1),
+      Color.fromRGBO(237, 213, 5, 1),
+      Color.fromRGBO(237, 212, 3, 1),
     ],
     [
-      Color.fromRGBO(237, 212, 3,
-          1), //Цвет 4 градиента кнопки и Цвет 2 градиента кнопки при onTapUp [3]
-      Color.fromRGBO(237, 213, 5,
-          1), //Цвет 3 градиента кнопки и Цвет 1 градиента кнопки при onTapUp[2]
-      Color.fromRGBO(254, 229, 0, 1), //Цвет 2 градиента кнопки [1]
-      Color.fromRGBO(253, 228, 0, 1), //Цвет 1 градиента кнопки [0]
+      Color.fromRGBO(237, 212, 3, 1),
+      Color.fromRGBO(237, 213, 5, 1),
+      Color.fromRGBO(254, 229, 0, 1),
+      Color.fromRGBO(253, 228, 0, 1),
     ],
     [
-      Color.fromRGBO(255, 0, 0,
-          1), //Цвет 4 градиента кнопки и Цвет 2 градиента кнопки при onTapUp [3]
-      Color.fromRGBO(255, 0, 0,
-          1), //Цвет 3 градиента кнопки и Цвет 1 градиента кнопки при onTapUp[2]
-      Color.fromRGBO(208, 5, 5, 1), //Цвет 2 градиента кнопки [1]
-      Color.fromRGBO(208, 5, 5, 1), //Цвет 1 градиента кнопки [0]
+      Color.fromRGBO(255, 0, 0, 1),
+      Color.fromRGBO(255, 0, 0, 1),
+      Color.fromRGBO(208, 5, 5, 1),
+      Color.fromRGBO(208, 5, 5, 1),
     ],
     [
       Color.fromRGBO(209, 0, 0, 1),

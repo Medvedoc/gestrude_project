@@ -8,16 +8,17 @@ class CustomDropboxWidget extends StatefulWidget {
   final String headDropbox;
   final int countDropbox;
   final List<TitanButton> listparams;
+  final bool gradient;
 
   CustomDropboxWidget(
-      {this.headDropbox, this.style, this.countDropbox, this.listparams});
+      {this.headDropbox, this.style, this.countDropbox, this.listparams, this.gradient});
 
   @override
   _CustomDropboxWidgetState createState() => _CustomDropboxWidgetState();
 }
 
 class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
-  bool _click = false; //Событие на клик по кнопке
+  bool _click; //Событие на клик по кнопке
   Color color;
   List<Color> colors;
   List<double> stops;
@@ -31,6 +32,7 @@ class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
   bool _visible = false; //Раскрывающийся контейнер по умолчанию скрыт
   double _height = 0.0; //Высота раскрывающегося контейнера
   Alignment alignment; //Начало раскрывания контенера
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,34 +40,26 @@ class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
         children: <Widget>[
           TitanButton(
               pressTap: pressTap,
-              //pressTapDown: pressTapDown,
-              //pressTapUp: pressTapUp,
+              pressTapDown: pressTapDown,
+              pressTapUp: pressTapUp,
               headButton: widget.headDropbox,
-              count: widget.countDropbox!=null?widget.countDropbox:0,
+              count: widget.countDropbox != null ? widget.countDropbox : 0,
               style: TitanButtonStyle()),
           InkWell(
             child: AnimatedOpacity(
-              opacity: _visible ? 1.0 : 0.3,
+              opacity: _visible ? 1.0 : 0.0,
               duration: widget.style.duration[0],
               child: AnimatedContainer(
-                color: Colors.red,
                 margin: widget.style.edgeInsets[6],
                 alignment: Alignment.topCenter,
                 height: _height,
                 duration: widget.style.duration[1],
                 curve: Curves.fastOutSlowIn,
-                /*child: new ListView.builder(
-                      itemCount: 3,
-                      itemBuilder: (BuildContext ctxt, int index) {
-                        return new Text('wedwe');
-                      }),*/
-
                 child: ListView.builder(
                   padding: widget.style.edgeInsets[11],
                   itemCount: widget.listparams.length,
                   primary: false,
                   itemBuilder: (BuildContext context, int index) {
-                    //print(widget.listparams.length);
                     return Container(
                       padding: widget.style.edgeInsets[12],
                       child: widget.listparams[index],
@@ -83,7 +77,7 @@ class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
   void pressTapUp() {
     setState(() {
       // _click = false;
-      begin = Alignment.topCenter;
+      /* begin = Alignment.topCenter;
       end = Alignment.bottomCenter;
       stops = widget.style.stopGradient[0];
       colors = [
@@ -91,14 +85,14 @@ class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
         widget.style.colors[1],
         widget.style.colors[2],
         widget.style.colors[3]
-      ];
+      ];*/
     });
   }
 
   void pressTapDown() {
     setState(() {
       //_click = true;
-      begin = Alignment.bottomCenter;
+      /* begin = Alignment.bottomCenter;
       end = Alignment.topCenter;
       colors = [
         widget.style.colors[3],
@@ -106,7 +100,7 @@ class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
         widget.style.colors[1],
         widget.style.colors[0]
       ];
-      stops = widget.style.stopGradient[0];
+      stops = widget.style.stopGradient[0];*/
     });
   }
 
@@ -135,7 +129,6 @@ class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
                 .toDouble();
         _visible = !_visible;
         _paddingVertical = 0;
-
         counter += 1;
       } else {
         _click = false;
@@ -181,3 +174,39 @@ class Serb extends StatelessWidget {
     );
   }
 }
+/*void pressTap() {
+    setState(() {
+      if (counter == 0) {
+        _click = false;
+        print(_click);
+        //pressTapDown();
+        begin = Alignment.bottomCenter;
+      end = Alignment.topCenter;
+      colors = widget.gradient == true
+          ? widget.style.gradientButton[3]
+          : widget.style.gradientButton[1];
+      stops = widget.style.stopGradient[0];
+      _heightButton = widget.style.heightUp;
+      _margin = widget.style.edgeInsets[0];
+      _padding = widget.style.edgeInsets[2];
+
+        counter += 1;
+      } else {
+        _click = true;
+        print(_click);
+        //pressTapDown();
+        begin = Alignment.topCenter;
+      end = Alignment.bottomCenter;
+      stops = widget.style.stopGradient[0];
+
+      colors = widget.gradient == true
+          ? widget.style.gradientButton[2]
+          : widget.style.gradientButton[0];
+      _heightButton = widget.style.heightUp;
+      _margin = widget.style.edgeInsets[1];
+      _padding = widget.style.edgeInsets[3];
+
+        counter -= 1;
+      }
+    });
+  }*/

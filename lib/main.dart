@@ -21,14 +21,13 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: Container(
+            width: 380.0,
             child: Column(
               children: <Widget>[
                 TitanButtonWidget(),
                 //TitanDropboxWidget(),
                 SizedBox(height: 30.0),
                 TitanDropboxWidgetWork(),
-                SizedBox(height: 30.0),
-                Text('fkfdgfhgfghgfhghg')
               ],
             ),
           ),
@@ -50,7 +49,6 @@ class TitanButtonWidget extends StatelessWidget {
     titanButtonStandart.showShadow = false;
 
     return Container(
-      width: 380.0,
       child: Column(
         children: <Widget>[
           SizedBox(height: 5.0),
@@ -61,13 +59,13 @@ class TitanButtonWidget extends StatelessWidget {
               style: TitanButtonStyle()),
           SizedBox(height: 5.0),
           TitanButton(
-              headButton: "Titan 02",
-              count: 10,
-              style: TitanButtonStyle()),
+              headButton: "Titan 02", count: 10, style: TitanButtonStyle()),
           SizedBox(height: 5.0),
           TitanButton(
-            gradient: true,
-              headButton: "Titan 03", count: 0, style: TitanButtonStyle()),
+              gradient: true,
+              headButton: "Titan 03",
+              count: 0,
+              style: TitanButtonStyle()),
           SizedBox(height: 5.0),
           TitanButton(
               icon: Icons.image_outlined,

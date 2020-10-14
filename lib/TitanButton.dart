@@ -41,10 +41,13 @@ class _TitanButtonState extends State<TitanButton> {
   List<double> stops;
   Alignment begin;
   Alignment end;
-  double _height;
   String headButton;
-  int aaa;
-  double bbb;
+
+  double _heightButton;
+  EdgeInsets _margin;
+  EdgeInsets _padding;
+  int counter = 0;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -54,6 +57,7 @@ class _TitanButtonState extends State<TitanButton> {
             Light(intensity: widget.style.intensity, position: Point(_x, _y)),
         builder: (BuildContext context, ShineShadow shineShadow) {
           return AnimatedContainer(
+            height: widget.style.heightUp+(widget.style.heightUp-widget.style.heightDown),
             duration: Duration(seconds: 1),
             alignment: Alignment.center,
             child: GestureDetector(
@@ -63,13 +67,9 @@ class _TitanButtonState extends State<TitanButton> {
               //Тень кнопки
               child: AnimatedContainer(
                 duration: widget.style.duration[2],
-                height: _height,
-                margin: _click
-                    ? widget.style.edgeInsets[0]
-                    : widget.style.edgeInsets[1],
-                padding: _click
-                    ? widget.style.edgeInsets[2]
-                    : widget.style.edgeInsets[3],
+                height: _heightButton,
+                margin: _margin,
+                padding: _padding,
                 decoration: BoxDecoration(
                   color: widget.style.colors[6],
                   borderRadius: widget.style.radiusBorder[0],
@@ -242,17 +242,13 @@ class _TitanButtonState extends State<TitanButton> {
       begin = Alignment.topCenter;
       end = Alignment.bottomCenter;
       stops = widget.style.stopGradient[0];
-      /*colors = [
-        widget.style.colors[0],
-        widget.style.colors[1],
-        widget.style.colors[2],
-        widget.style.colors[3]
-      ];*/
 
       colors = widget.gradient == true
           ? widget.style.gradientButton[2]
           : widget.style.gradientButton[0];
-      _height = _click ? 44.0 : 54.0;
+      _heightButton = widget.style.heightUp;
+      _margin = widget.style.edgeInsets[1];
+      _padding = widget.style.edgeInsets[3];
     });
   }
 
@@ -264,44 +260,67 @@ class _TitanButtonState extends State<TitanButton> {
       _click = true;
       begin = Alignment.bottomCenter;
       end = Alignment.topCenter;
-      /* colors = [
-        widget.style.colors[3],
-        widget.style.colors[2],
-        widget.style.colors[1],
-        widget.style.colors[0]
-      ];
-      */
-
       colors = widget.gradient == true
           ? widget.style.gradientButton[3]
           : widget.style.gradientButton[1];
       stops = widget.style.stopGradient[0];
-      _height = _click ? 54.0 : 44.0;
+      _heightButton = widget.style.heightUp;
+      _margin = widget.style.edgeInsets[0];
+      _padding = widget.style.edgeInsets[2];
     });
   }
 
   void pressTap() {
     if (widget.pressTap != null) {
       widget.pressTap();
+      if (counter == 0) {
+        _click = false;
+        print(_click);
+        //pressTapDown();
+        begin = Alignment.bottomCenter;
+      end = Alignment.topCenter;
+      colors = widget.gradient == true
+          ? widget.style.gradientButton[3]
+          : widget.style.gradientButton[1];
+      stops = widget.style.stopGradient[0];
+      _heightButton = widget.style.heightUp;
+      _margin = widget.style.edgeInsets[0];
+      _padding = widget.style.edgeInsets[2];
+
+        counter += 1;
+     } else {
+        _click = true;
+        print(_click);
+        //pressTapDown();
+        begin = Alignment.topCenter;
+      end = Alignment.bottomCenter;
+      stops = widget.style.stopGradient[0];
+
+      colors = widget.gradient == true
+          ? widget.style.gradientButton[2]
+          : widget.style.gradientButton[0];
+      _heightButton = widget.style.heightUp;
+      _margin = widget.style.edgeInsets[1];
+      _padding = widget.style.edgeInsets[3];
+
+        counter -= 1;
+      }
     }
   }
 
   void initState() {
     super.initState();
+    _click = false;
     _x = widget.style.x;
     _y = widget.style.y;
     begin = Alignment.topCenter;
     end = Alignment.bottomCenter;
     stops = widget.style.stopGradient[0];
-    /*colors = [
-      widget.style.colors[0],
-      widget.style.colors[1],
-      widget.style.colors[2],
-      widget.style.colors[3]
-    ];*/
     colors = widget.gradient == true
         ? widget.style.gradientButton[2]
         : widget.style.gradientButton[0];
-    _height = 54.0;
+    _heightButton = widget.style.heightUp;
+    _margin = widget.style.edgeInsets[1];
+    _padding = widget.style.edgeInsets[3];
   }
 }
