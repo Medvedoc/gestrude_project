@@ -55,7 +55,11 @@ class TitanButtonWidget extends StatelessWidget {
           TitanButton(
               icon: Icons.camera_alt_outlined,
               headButton: "Titan 01",
-              count: 0,
+              style: TitanButtonStyle()),
+          SizedBox(height: 5.0),
+          TitanButton(
+              icon: Icons.camera_alt_outlined,
+              count: 100,
               style: TitanButtonStyle()),
           SizedBox(height: 5.0),
           TitanButton(
@@ -64,7 +68,6 @@ class TitanButtonWidget extends StatelessWidget {
           TitanButton(
               gradient: true,
               headButton: "Titan 03",
-              count: 0,
               style: TitanButtonStyle()),
           SizedBox(height: 5.0),
           TitanButton(
@@ -83,7 +86,6 @@ class TitanButtonWidget extends StatelessWidget {
                   child: TitanButton(
                       icon: Icons.camera_alt_outlined,
                       headButton: "фото",
-                      count: 0,
                       style: TitanButtonStyle()),
                 ),
                 Expanded(
@@ -91,7 +93,6 @@ class TitanButtonWidget extends StatelessWidget {
                   child: TitanButton(
                       icon: Icons.image_outlined,
                       headButton: "галерея",
-                      count: 0,
                       style: TitanButtonStyle()),
                 ),
               ],
@@ -108,7 +109,6 @@ class TitanButtonWidget extends StatelessWidget {
                   child: TitanButton(
                       icon: Icons.camera_alt_outlined,
                       headButton: "фото",
-                      count: 0,
                       style: titanButtonStandart),
                 ),
                 Expanded(
@@ -116,7 +116,7 @@ class TitanButtonWidget extends StatelessWidget {
                   child: TitanButton(
                       icon: Icons.image_outlined,
                       headButton: "галерея",
-                      count: 0,
+                      count: 10,
                       style: titanButtonStandart),
                 ),
               ],
@@ -135,9 +135,8 @@ class TitanDropboxWidget extends StatelessWidget {
       children: <Widget>[
         CustomDropboxWidget(style: TitanButtonStyle(), listparams: [
           TitanButton(
-              headButton: "button1", count: 0, style: TitanButtonStyle()),
-          TitanButton(
-              headButton: "button2", count: 0, style: TitanButtonStyle()),
+              headButton: "button1", count: 10, style: TitanButtonStyle()),
+          TitanButton(headButton: "button2", style: TitanButtonStyle()),
         ]),
       ],
     );

@@ -67,7 +67,7 @@ class TitanButtonStyle {
     Color.fromRGBO(144, 126, 90, 1), //Цвет 2 градиента обводки счетчика [12]
     Color.fromRGBO(101, 91, 0, 1), //Цвет рамки счетчика [13]
     Color.fromRGBO(255, 255, 255, 1), //Цвет текста [14]
-    Colors.grey.shade900, //Цвет иконки с тенью [15]
+    Colors.grey.shade400, //Цвет иконки с тенью [15]
   ];
 
   List<List<Color>> gradientButton = [
@@ -115,9 +115,9 @@ class TitanButtonStyle {
   //Задержка анимации
   List<Duration> duration = [
     Duration(
-        milliseconds: 300), //[0] задержка появления элемента AnimatedOpacity
+        milliseconds: 200), //[0] задержка появления элемента AnimatedOpacity
     Duration(
-        milliseconds: 300), //[1] задержка раскрытия элемента AnimatedContainer
+        milliseconds: 200), //[1] задержка раскрытия элемента AnimatedContainer
     Duration(
         milliseconds:
             100), //[2] задержка анимации контейнера AnimatedContainer тени кнопки

@@ -43,7 +43,7 @@ class _CustomDropboxWidgetState extends State<CustomDropboxWidget> {
               pressTapDown: pressTapDown,
               pressTapUp: pressTapUp,
               headButton: widget.headDropbox,
-              count: widget.countDropbox != null ? widget.countDropbox : 0,
+              //count: widget.countDropbox != null ? widget.countDropbox : 0,
               style: TitanButtonStyle()),
           InkWell(
             child: AnimatedOpacity(
