@@ -39,7 +39,6 @@ class _MyAppState extends State<MyApp> {
 class TitanButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
     var titanButtonStandart = TitanButtonStyle();
     titanButtonStandart.colors[14] = Colors.black;
     titanButtonStandart.colors[15] = Colors.black;
@@ -47,6 +46,15 @@ class TitanButtonWidget extends StatelessWidget {
     titanButtonStandart.textShadowy = 0;
     titanButtonStandart.intensity = 0;
     titanButtonStandart.showShadow = false;
+
+    var titanButtonStandart2 = TitanButtonStyle();
+    //titanButtonStandart2.colors[14] = Colors.black;
+    titanButtonStandart2.colors[14] = Colors.black.withOpacity(0.5);
+    titanButtonStandart2.colors[15] = Colors.black;
+    titanButtonStandart2.textShadowx = -12;
+    titanButtonStandart2.textShadowy = -12;
+    titanButtonStandart2.intensity = 3;
+    titanButtonStandart2.showShadow = true;
 
     return Container(
       child: Column(
@@ -63,7 +71,7 @@ class TitanButtonWidget extends StatelessWidget {
               style: TitanButtonStyle()),
           SizedBox(height: 5.0),
           TitanButton(
-              headButton: "Titan 02", count: 10, style: TitanButtonStyle()),
+              headButton: "Titan 02", count: 10, style: titanButtonStandart2),
           SizedBox(height: 5.0),
           TitanButton(
               gradient: true,
