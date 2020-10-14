@@ -127,5 +127,4 @@ class TitanButtonStyle {
     Duration(
         milliseconds: 300), //[4] задержка анимации AnimatedContainer счетчика
   ];
-  //TitanButtonStyle({this.coefButton});
 }

@@ -13,7 +13,6 @@ class TitanButton extends StatefulWidget {
   final int count;
   final TitanButtonStyle style;
   final IconData icon;
-  final double coefButton;
   final bool gradient;
 
   TitanButton({
@@ -24,7 +23,6 @@ class TitanButton extends StatefulWidget {
     this.pressTapDown,
     this.pressTapUp,
     this.icon,
-    this.coefButton,
     this.gradient,
   });
 
