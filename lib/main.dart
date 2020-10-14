@@ -19,17 +19,12 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text("MyWork"),
         ),
-        body: Center(
-          child: Container(
-            width: 380.0,
-            child: Column(
-              children: <Widget>[
-                TitanButtonWidget(),
-                SizedBox(height: 30.0),
-                TitanDropboxWidget(),
-              ],
-            ),
-          ),
+        body: ListView(
+          children: <Widget>[
+            TitanButtonWidget(),
+            SizedBox(height: 30.0),
+            TitanDropboxWidget(),
+          ],
         ),
       ),
     );
@@ -145,6 +140,18 @@ class TitanDropboxWidget extends StatelessWidget {
             headDropbox: 'Dropbox',
             style: TitanButtonStyle(),
             listparams: [
+              TitanButton(
+                  headButton: "button1", count: 0, style: TitanButtonStyle()),
+              TitanButton(
+                  headButton: "button2", count: 0, style: TitanButtonStyle()),
+              TitanButton(
+                  headButton: "button1", count: 0, style: TitanButtonStyle()),
+              TitanButton(
+                  headButton: "button2", count: 0, style: TitanButtonStyle()),
+              TitanButton(
+                  headButton: "button1", count: 0, style: TitanButtonStyle()),
+              TitanButton(
+                  headButton: "button2", count: 0, style: TitanButtonStyle()),
               TitanButton(
                   headButton: "button1", count: 0, style: TitanButtonStyle()),
               TitanButton(
