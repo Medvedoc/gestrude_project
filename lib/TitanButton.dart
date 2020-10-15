@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gestrude_project/TitanStyle.dart';
@@ -67,12 +68,12 @@ class _TitanButtonState extends State<TitanButton> {
             child: AnimatedContainer(
               height: widget.style.heightUp +
                   (widget.style.heightUp - widget.style.heightDown),
-              duration: Duration(milliseconds: 1),
+              duration: Duration(microseconds: 1),
               alignment: Alignment.center,
               child: GestureDetector(
                 onTap: pressTap,
-                onTapDown: (value) => pressTapDown(),
-                onTapUp: (value) => pressTapUp(),
+                //onTapDown: (value) => pressTapDown(),
+                //onTapUp: (value) => pressTapUp(),
                 //Задаем эффект тени контейнеру кнопки
                 child: AnimatedContainer(
                   duration: widget.style.duration[2],
@@ -159,10 +160,11 @@ class _TitanButtonState extends State<TitanButton> {
                                           : WidgetSpan(child: SizedBox()),
                                       TextSpan(
                                         text: (widget.headButton != null
-                                          ? " " +
-                                              widget.headButton.toUpperCase() +
-                                              " "
-                                          : ""),
+                                            ? " " +
+                                                widget.headButton
+                                                    .toUpperCase() +
+                                                " "
+                                            : ""),
                                         style: TextStyle(
                                           height: widget.style.heightText,
                                           color: widget.style.colors[14],
@@ -286,7 +288,7 @@ class _TitanButtonState extends State<TitanButton> {
     );
   }
 
-  void pressTapUp() {
+  /*void pressTapUp() {
     if (widget.pressTapUp != null) {
       widget.pressTapUp();
     }
@@ -320,13 +322,15 @@ class _TitanButtonState extends State<TitanButton> {
       _margin = widget.style.edgeInsets[0];
       _padding = widget.style.edgeInsets[2];
     });
-  }
+  }*/
 
   void pressTap() {
-    if (widget.pressTap != null) {
-      widget.pressTap();
-      if (_counter == 0) {
+
+    //if (widget.pressTap != null) {
+    //  widget.pressTap();
+      /*if (_counter == 0) {
         _click = false;
+        print(_click);
         _begin = Alignment.bottomCenter;
         _end = Alignment.topCenter;
         _colors = widget.gradient == true
@@ -340,6 +344,7 @@ class _TitanButtonState extends State<TitanButton> {
         _counter += 1;
       } else {
         _click = true;
+        print(_click);
         _begin = Alignment.topCenter;
         _end = Alignment.bottomCenter;
         _stops = widget.style.stopGradient[0];
@@ -351,13 +356,64 @@ class _TitanButtonState extends State<TitanButton> {
         _padding = widget.style.edgeInsets[3];
         _arrow = Icons.arrow_drop_down;
         _counter -= 1;
-      }
-    }
+      }*/
+setState(() {
+  _click = true;
+        print('down $_click');
+        _begin = Alignment.bottomCenter;
+        _end = Alignment.topCenter;
+        _colors = widget.gradient == true
+            ? widget.style.gradientButton[3]
+            : widget.style.gradientButton[1];
+        _stops = widget.style.stopGradient[0];
+        _heightButton = widget.style.heightUp;
+        _margin = widget.style.edgeInsets[0];
+        _padding = widget.style.edgeInsets[2];
+        _arrow = Icons.arrow_drop_up;
+
+        Timer(Duration(milliseconds: 100), () {
+          setState(() {
+            _click = !_click;
+        print('up $_click');
+        _begin = Alignment.topCenter;
+        _end = Alignment.bottomCenter;
+        _stops = widget.style.stopGradient[0];
+        _colors = widget.gradient == true
+            ? widget.style.gradientButton[2]
+            : widget.style.gradientButton[0];
+        _heightButton = widget.style.heightUp;
+        _margin = widget.style.edgeInsets[1];
+        _padding = widget.style.edgeInsets[3];
+        _arrow = Icons.arrow_drop_down;
+          });
+  
+});
+
+});
+      
+        
+
+
+        /*_click = false;
+        print('up $_click');
+        _begin = Alignment.topCenter;
+        _end = Alignment.bottomCenter;
+        _stops = widget.style.stopGradient[0];
+        _colors = widget.gradient == true
+            ? widget.style.gradientButton[2]
+            : widget.style.gradientButton[0];
+        _heightButton = widget.style.heightUp;
+        _margin = widget.style.edgeInsets[1];
+        _padding = widget.style.edgeInsets[3];
+        _arrow = Icons.arrow_drop_down;*/
+      
+    //}
   }
 
   void initState() {
     super.initState();
     _click = false;
+    print('start $_click');
     _counter = 0;
     _textshadowx = widget.style.textShadowx;
     _textshadowy = widget.style.textShadowy;

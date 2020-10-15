@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> {
             TitanButtonWidget(),
             SizedBox(height: 30.0),
             TitanDropboxWidget(),
+            Text('sdfsdfdsfg'),
           ],
         ),
       ),
