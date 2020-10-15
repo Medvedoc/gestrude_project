@@ -9,6 +9,7 @@ class TitanDropbox extends StatefulWidget {
   final List<TitanButton> listparams;
   final TitanButtonStyle style;
   final String headDropbox;
+  final bool variable;
 
   TitanDropbox({
     this.gradient,
@@ -16,6 +17,7 @@ class TitanDropbox extends StatefulWidget {
     this.listparams,
     this.style,
     this.headDropbox,
+    this.variable,
   });
 
   @override
@@ -31,14 +33,16 @@ class _TitanDropboxState extends State<TitanDropbox> {
   int _counter = 0; //Переключатель срабатывания Dropbox
   List<String>
       _sumPadding; //Список всех отступов в получаемом параметре из стилей
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Column(
         children: <Widget>[
           TitanButton(
+            variable:true,
               pressTap: pressTap,
+              //pressTapDown:pressTapDown,
+              //pressTapUp:pressTapUp,
               headButton: widget.headDropbox,
               arrowDropbox: true,
               style: TitanButtonStyle()),
@@ -95,11 +99,13 @@ class _TitanDropboxState extends State<TitanDropbox> {
         _visible = !_visible;
         _paddingVertical = 0;
         _counter += 1;
+        print(_counter);
       } else {
         _counter -= 1;
         _visible = !_visible;
         _height = 0;
         alignment = Alignment.topCenter;
+        print(_counter);
       }
     });
   }

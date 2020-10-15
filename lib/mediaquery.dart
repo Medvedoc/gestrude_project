@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+Timer(Duration(milliseconds: 100), () {}
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
