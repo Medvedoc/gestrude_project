@@ -21,6 +21,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: ListView(
           children: <Widget>[
+            SizedBox(height: 30.0),
             TitanButtonWidget(),
             SizedBox(height: 30.0),
             TitanDropboxWidget(),
@@ -51,12 +52,15 @@ class TitanButtonWidget extends StatelessWidget {
     titanButtonStandart2.intensity = 3;
     titanButtonStandart2.showShadow = true;
 
+    //print(MediaQuery.of(context).size.width);
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: <Widget>[
-          SizedBox(height: 5.0),
+          SizedBox(height: 15.0),
           TitanButton(
-              icon: Icons.camera_alt_outlined,
+              //icon: Icons.camera_alt_outlined,
+              icon: Icons.ac_unit,
               headButton: "Titan 01",
               style: TitanButtonStyle()),
           SizedBox(height: 5.0),
@@ -82,7 +86,9 @@ class TitanButtonWidget extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Expanded(
                   flex: 1,
@@ -105,7 +111,8 @@ class TitanButtonWidget extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Expanded(
                   flex: 1,

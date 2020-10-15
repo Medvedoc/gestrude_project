@@ -49,6 +49,8 @@ class TitanButtonStyle {
 
     EdgeInsets.only(
         top: 8.0), //Отступ счетчика сверху и по-бокам при onTap Dropbox [13]
+        
+    EdgeInsets.symmetric(horizontal: 10.0),//Отступы кнопки по бокам [14]
   ];
 
   //Цвета
@@ -87,8 +89,8 @@ class TitanButtonStyle {
       //Градиент активной обычной кнопки
       Color.fromRGBO(237, 212, 3, 1),
       Color.fromRGBO(237, 213, 5, 1),
-      Color.fromRGBO(254, 229, 0, 1),
-      Color.fromRGBO(253, 228, 0, 1),
+      Color.fromRGBO(238, 212, 3, 1),
+      Color.fromRGBO(238, 213, 5, 1),
     ],
     [
       //Градиент неактивной красной кнопки
@@ -139,7 +141,7 @@ class TitanButtonStyle {
             100), //[2] задержка анимации контейнера AnimatedContainer тени кнопки
     Duration(
         milliseconds:
-            200), //[3] задержка анимации AnimatedContainer градиента подложки с текстом кнопки
+            100), //[3] задержка анимации AnimatedContainer градиента подложки с текстом кнопки
     Duration(
         milliseconds: 300), //[4] задержка анимации AnimatedContainer счетчика
   ];
